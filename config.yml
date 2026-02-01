@@ -1,0 +1,31 @@
+# Site settings
+title: "Patrick's AI Learning Journey"
+description: "Exploring AI, Machine Learning, and Data Science - A FAU Data Analytics Student's Blog"
+author: "Patrick"
+email: your.email@fau.edu  # Optional
+baseurl: ""
+url: "https://yourusername.github.io"
+
+# Theme
+theme: minima  # Clean, simple theme (or try: jekyll-theme-cayman, minimal-mistakes)
+
+# Plugins
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
+
+# Navigation
+header_pages:
+  - index.md
+  - about.md
+
+# Enable code highlighting
+markdown: kramdown
+highlighter: rouge
+
+# Social links (optional)
+github_username: yourusername
+linkedin_username: yourlinkedin  # Optional
+
+# Show excerpts on homepage
+show_excerpts: true
