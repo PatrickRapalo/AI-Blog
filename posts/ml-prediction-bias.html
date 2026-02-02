@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML Prediction Bias - Patrick's AI Journey</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .post-body {
+            line-height: 1.8;
+        }
+
+        .post-body h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .post-body h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .post-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-body ul, .post-body ol {
+            margin-bottom: 1.2rem;
+            margin-left: 2rem;
+        }
+
+        .post-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-body code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .post-body pre {
+            background-color: #2d2d2d;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-body pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #f8f8f2;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #e3f2fd;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .metric-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .metric-card .metric-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .metric-card .metric-formula {
+            font-family: 'Courier New', monospace;
+            background-color: #e8e8e8;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .image-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Patrick's AI Journey</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#posts">Posts</a></li>
+                <li><a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+
+        <header class="post-header">
+            <h1 class="post-title">ML Prediction Bias: Understanding Confusion Matrices in Fraud Detection</h1>
+            <p class="post-meta">
+                <i class="far fa-calendar"></i> February 2, 2025 |
+                <i class="far fa-clock"></i> 10 min read
+            </p>
+        </header>
+
+        <div class="post-body">
+            <p>Credit card fraud is a massive problem. Every time you swipe your card, an ML model is making a split-second decision: is this transaction legitimate or fraudulent? In my AI class, I worked on an application mapping activity that explored how these models work, how we measure their performance using confusion matrices, and where bias can creep in with serious real-world consequences. This post breaks down what I learned.</p>
+
+            <h2>How Fraud Detection Works</h2>
+
+            <p>At its core, fraud detection AI is a pattern recognition system. The model is trained on historical transaction data, learning to distinguish between fraudulent and legitimate transactions based on behavioral patterns.</p>
+
+            <h3>Red Flags the AI Learns</h3>
+
+            <p>The model picks up on signals that are statistically associated with fraud:</p>
+
+            <ul>
+                <li><strong>Unusual spending amounts:</strong> Large purchases significantly above a customer's normal spending range</li>
+                <li><strong>Geographic anomalies:</strong> Transactions from unusual locations, especially foreign countries the customer has never visited</li>
+                <li><strong>Rapid-fire transactions:</strong> Multiple purchases in a short time window, which may indicate a stolen card being used quickly before it's reported</li>
+                <li><strong>Odd timing:</strong> Purchases at unusual hours, like 3 AM, when the customer rarely shops</li>
+                <li><strong>High-risk merchant categories:</strong> Certain types of merchants combined with other suspicious factors</li>
+            </ul>
+
+            <h3>Green Flags the AI Learns</h3>
+
+            <ul>
+                <li><strong>Consistent habits:</strong> Purchases matching the customer's normal behavior</li>
+                <li><strong>Familiar locations:</strong> Transactions from places the customer regularly visits</li>
+                <li><strong>Reasonable amounts:</strong> Purchase sizes in line with the customer's typical range</li>
+                <li><strong>Behavioral consistency:</strong> Transaction patterns that match past behavior</li>
+            </ul>
+
+            <h2>The Prediction Phase</h2>
+
+            <p>When you swipe your card, the AI has milliseconds to make a decision. It analyzes several inputs simultaneously:</p>
+
+            <ol>
+                <li><strong>Transaction details:</strong> The amount, merchant, location, and time of the transaction</li>
+                <li><strong>Customer history:</strong> Your typical spending patterns, usual locations, and average purchase size</li>
+                <li><strong>Card history:</strong> Whether this card has been involved in fraud before</li>
+                <li><strong>Behavioral patterns:</strong> Whether this transaction is consistent with how you normally shop</li>
+            </ol>
+
+            <p>These features are combined and fed into the model, which produces a binary classification: <strong>fraudulent</strong> or <strong>legitimate</strong>. There's no middle ground -- the system has to make a definitive yes or no decision in real time.</p>
+
+            <h2>Binary Classification</h2>
+
+            <div class="highlight-box">
+                <p>This is a <strong>classification</strong> task, specifically <strong>binary classification</strong>. The model sorts each transaction into one of two categories: fraudulent or legitimate. Unlike regression (which predicts a continuous value), classification produces a discrete label. Binary classification is one of the most common ML task types, used everywhere from spam detection to medical diagnosis.</p>
+            </div>
+
+            <h2>Understanding the Confusion Matrix</h2>
+
+            <p>A confusion matrix is a table that summarizes how well a classification model performs by comparing its predictions against the actual outcomes. For a binary classifier, it's a 2x2 grid with four possible outcomes:</p>
+
+            <ul>
+                <li><strong>True Positive (TP):</strong> The model predicted fraud, and it was actually fraud. This is a correct catch.</li>
+                <li><strong>False Positive (FP):</strong> The model predicted fraud, but it was actually legitimate. This means a real customer's card got blocked unnecessarily.</li>
+                <li><strong>True Negative (TN):</strong> The model predicted legitimate, and it was actually legitimate. The transaction goes through smoothly.</li>
+                <li><strong>False Negative (FN):</strong> The model predicted legitimate, but it was actually fraud. This is the most dangerous outcome -- fraud slips through undetected.</li>
+            </ul>
+
+            <h3>Example: 10,000 Transactions</h3>
+
+            <p>Here's the confusion matrix from our activity, based on a sample of 10,000 transactions where 100 are actual fraud and 9,900 are legitimate:</p>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Predicted Fraud</th>
+                        <th>Predicted Legitimate</th>
+                        <th>Total Real</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Real Fraud</td>
+                        <td>95 (TP)</td>
+                        <td>5 (FN)</td>
+                        <td>100</td>
+                    </tr>
+                    <tr>
+                        <td>Real Legitimate</td>
+                        <td>50 (FP)</td>
+                        <td>9,850 (TN)</td>
+                        <td>9,900</td>
+                    </tr>
+                    <tr>
+                        <td>Total Predicted</td>
+                        <td>145</td>
+                        <td>9,855</td>
+                        <td>10,000</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Notice the class imbalance: only 1% of transactions are fraudulent. This is typical of real-world fraud detection and, as we'll see, it has major implications for how we evaluate model performance.</p>
+
+            <h2>Performance Metrics</h2>
+
+            <p>A single number can't capture how well a fraud detection model performs. Different metrics tell us different things:</p>
+
+            <div class="metric-card">
+                <p class="metric-name">Accuracy</p>
+                <p class="metric-formula">(95 + 9,850) / 10,000 = 99.45%</p>
+                <p>The percentage of all predictions that were correct. Sounds impressive, but it can be misleading with imbalanced data (more on this below).</p>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">Precision</p>
+                <p class="metric-formula">95 / (95 + 50) = 65.52%</p>
+                <p>Of all the transactions the model flagged as fraud, how many were actually fraud? A precision of 65.52% means about 1 in 3 flagged transactions were actually legitimate. That's a lot of frustrated customers getting their cards blocked for no reason.</p>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">Recall (Sensitivity)</p>
+                <p class="metric-formula">95 / (95 + 5) = 95%</p>
+                <p>Of all the actual fraud cases, how many did the model catch? A recall of 95% means the model caught 95 out of 100 fraud cases. The 5 it missed represent real financial losses for customers and the bank.</p>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">F1-Score</p>
+                <p class="metric-formula">2 x (Precision x Recall) / (Precision + Recall) = 55.88%</p>
+                <p>The harmonic mean of precision and recall. It balances both metrics into a single score. The relatively low F1-score here reflects the tension between catching fraud (high recall) and not blocking legitimate transactions (lower precision).</p>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">False Positive Rate</p>
+                <p class="metric-formula">50 / 9,900 = 0.51%</p>
+                <p>The percentage of legitimate transactions that were incorrectly flagged as fraud. While 0.51% sounds small, in a bank processing millions of transactions per day, that's thousands of customers getting their cards blocked unnecessarily.</p>
+            </div>
+
+            <h3>The Precision-Recall Tradeoff</h3>
+
+            <p>There's an inherent tension in fraud detection. If you make the model more aggressive at catching fraud (higher recall), it will also flag more legitimate transactions (lower precision). If you make it more conservative to avoid blocking legitimate transactions (higher precision), more fraud will slip through (lower recall).</p>
+
+            <p>Banks have to decide where on this spectrum they want to operate. Most err on the side of higher recall -- it's better to occasionally inconvenience a customer with a blocked card than to let fraud go undetected.</p>
+
+            <h2>Why Accuracy Can Be Misleading</h2>
+
+            <div class="highlight-box">
+                <p>Our model has <strong>99.45% accuracy</strong>. Sounds almost perfect, right? But consider this: a model that simply labels every single transaction as "legitimate" would achieve <strong>99% accuracy</strong> (since only 1% of transactions are fraud). It would catch zero fraud while being "99% accurate."</p>
+                <p>This is the <strong>class imbalance problem</strong>. When one class vastly outnumbers the other, accuracy becomes a poor metric because the model can score high just by always predicting the majority class. That's why metrics like precision, recall, and F1-score are essential -- they tell us how the model performs specifically on the rare but important class (fraud).</p>
+            </div>
+
+            <h2>Prediction Bias</h2>
+
+            <p>Even a technically accurate model can be unfair. Bias in ML systems can lead to certain groups of people being disproportionately affected by incorrect predictions.</p>
+
+            <h3>Socioeconomic Bias</h3>
+
+            <p>Fraud detection models learn what "normal" spending looks like for each customer. But this creates a problem: when a customer with typically lower transaction amounts makes a legitimate large purchase (maybe buying a new appliance or paying for a medical procedure), the model is more likely to flag it as suspicious. This disproportionately affects lower-income customers making legitimate big purchases.</p>
+
+            <p>The consequence? These customers are more likely to experience the frustration and embarrassment of a declined card for a perfectly valid transaction, while wealthier customers making the same purchase sail through without issues.</p>
+
+            <h3>Data Representation Bias</h3>
+
+            <p>This is a deeper, more systemic problem. If the training data reflects historical biases -- for example, if certain demographic groups were historically subject to more fraud investigations -- the model learns to associate those demographics with higher fraud risk, even when there's no causal relationship.</p>
+
+            <p>This creates a dangerous <strong>feedback loop</strong>: the biased model flags more transactions from the affected group, leading to more investigations, generating more data points that reinforce the original bias, and so on. The bias becomes self-reinforcing and gets worse over time.</p>
+
+            <h2>Mitigating Bias</h2>
+
+            <p>Addressing prediction bias requires a multi-pronged approach:</p>
+
+            <ul>
+                <li><strong>Audit the data:</strong> Regularly check training datasets for systemic biases. Look at whether certain groups are over-represented in fraud cases due to historical investigation patterns rather than actual fraud rates.</li>
+                <li><strong>Balance datasets:</strong> Use techniques like resampling (oversampling minority groups, undersampling majority groups) or generating synthetic data to create more balanced training sets.</li>
+                <li><strong>Fairness algorithms:</strong> Implement algorithmic fairness constraints that promote equitable outcomes across demographic groups. This might mean accepting slightly lower overall accuracy in exchange for more equal treatment.</li>
+                <li><strong>Human oversight:</strong> Have human reviewers examine transactions that were flagged based on features correlated with demographics. This adds a check against the model's potential biases.</li>
+                <li><strong>Graduated alerts:</strong> Instead of automatic blocks, implement graduated responses -- like sending a verification text for borderline cases rather than immediately declining the card. This reduces the impact of false positives on customers.</li>
+            </ul>
+
+            <h2>What I Learned</h2>
+
+            <div class="highlight-box">
+                <p><strong>Key Takeaways:</strong></p>
+                <ul>
+                    <li>Confusion matrices provide a complete picture of model performance that a single accuracy number cannot</li>
+                    <li>High accuracy can be meaningless with imbalanced datasets -- always look at precision, recall, and F1-score</li>
+                    <li>The precision-recall tradeoff forces real business decisions about acceptable error types</li>
+                    <li>ML bias can create feedback loops that amplify existing inequalities</li>
+                    <li>Responsible AI deployment requires ongoing auditing, fairness constraints, and human oversight</li>
+                </ul>
+            </div>
+
+            <hr style="margin: 3rem 0;">
+
+            <p><em>This post was based on an AI Application Mapping activity completed as part of my coursework at Florida Atlantic University.</em></p>
+
+            <p><strong>Questions or suggestions?</strong> Feel free to reach out via GitHub or connect with me on LinkedIn.</p>
+        </div>
+
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Patrick's AI Journey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
