@@ -1,0 +1,291 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent-Based Modeling - Patrick's AI Journey</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .post-body {
+            line-height: 1.8;
+        }
+
+        .post-body h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .post-body h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .post-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-body ul, .post-body ol {
+            margin-bottom: 1.2rem;
+            margin-left: 2rem;
+        }
+
+        .post-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-body code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .post-body pre {
+            background-color: #2d2d2d;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-body pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #f8f8f2;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .image-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Patrick's AI Journey</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#posts">Posts</a></li>
+                <li><a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <a href="../index.html#posts" class="back-link">← Back to All Posts</a>
+
+        <header class="post-header">
+            <h1 class="post-title">Agent-Based Modeling: Simulating Social Feature Adoption</h1>
+            <p class="post-meta">
+                <i class="far fa-calendar"></i> February 1, 2025 | 
+                <i class="far fa-clock"></i> 10 min read
+            </p>
+        </header>
+
+        <div class="post-body">
+            <p>In my AI class, I recently explored <strong>Agent-Based Modeling (ABM)</strong> - a powerful simulation technique for understanding complex systems through the interactions of autonomous agents. This post documents what I learned and built.</p>
+
+            <h2>What is Agent-Based Modeling?</h2>
+
+            <p>Agent-Based Modeling is a <strong>computational modeling paradigm</strong> where you simulate the actions and interactions of autonomous agents to understand emergent system-level behavior. Think of it as creating a virtual world with simple rules and watching what patterns emerge.</p>
+
+            <div class="highlight-box">
+                <h3>Key Characteristics</h3>
+                <ul>
+                    <li><strong>Purpose:</strong> Understanding complex systems through simulation</li>
+                    <li><strong>Scale:</strong> Hundreds to millions of simple agents</li>
+                    <li><strong>Goal:</strong> Observe emergent macro-level phenomena from micro-level interactions</li>
+                    <li><strong>Applications:</strong> Social science, economics, epidemiology, ecology</li>
+                </ul>
+            </div>
+
+            <h2>Real-World Applications</h2>
+
+            <p>ABM is used extensively in:</p>
+
+            <ul>
+                <li><strong>Public Health:</strong> Modeling disease spread, vaccination campaigns</li>
+                <li><strong>Business:</strong> Product adoption curves, market dynamics</li>
+                <li><strong>Urban Planning:</strong> Traffic patterns, pedestrian flow</li>
+                <li><strong>Ecology:</strong> Population dynamics, ecosystem behaviors</li>
+            </ul>
+
+            <h2>My Project: Social Media Feature Adoption</h2>
+
+            <p>I built a simulation to model how a new feature spreads through a social network. The key insight: <strong>adoption isn't random—it's driven by social influence</strong>.</p>
+
+            <h3>The Model</h3>
+
+            <p>Each agent (user) has:</p>
+            <ul>
+                <li><strong>Position:</strong> Location on a social network grid</li>
+                <li><strong>Influence threshold:</strong> % of neighbors needed to convince them</li>
+                <li><strong>Adoption status:</strong> Have they adopted the feature?</li>
+            </ul>
+
+            <h3>Decision Rule</h3>
+
+            <pre><code class="language-python">if (% of neighbors who adopted) > my_influence_threshold:
+    I will adopt</code></pre>
+
+            <h3>Implementation</h3>
+
+            <p>I used <strong>Mesa</strong>, a Python framework for agent-based modeling:</p>
+
+            <pre><code class="language-python">import mesa
+
+class SocialMediaUser(mesa.Agent):
+    def __init__(self, model):
+        super().__init__(model)
+        # Users need 20-60% of neighbors to adopt
+        self.influence_threshold = np.random.uniform(0.20, 0.60)
+        self.adopted_feature = False
+        
+    def step(self):
+        if not self.adopted_feature:
+            neighbors = self.model.grid.get_neighbors(self.pos)
+            if neighbors:
+                adoption_rate = sum(n.adopted_feature for n in neighbors) / len(neighbors)
+                if adoption_rate > self.influence_threshold:
+                    self.adopted_feature = True</code></pre>
+
+            <h2>Results & Insights</h2>
+
+            <h3>Key Findings:</h3>
+
+            <ol>
+                <li><strong>Network Effects Matter:</strong> Adoption spreads like ripples in water through social connections</li>
+                <li><strong>Critical Mass / Tipping Point:</strong> Once ~30-40% of a neighborhood adopts, growth accelerates dramatically</li>
+                <li><strong>Early Adopters are Crucial:</strong> Seeding with just 5% vs 20% early adopters cut time-to-50%-adoption by ~75%</li>
+                <li><strong>Spatial Clustering:</strong> Adoption forms geographic clusters before spreading, creating "islands" of users</li>
+            </ol>
+
+            <h2>Business Applications</h2>
+
+            <p>This type of modeling helps answer questions like:</p>
+
+            <ul>
+                <li><strong>Product Launch:</strong> How many influencers do we need to seed?</li>
+                <li><strong>Marketing ROI:</strong> What's the expected viral coefficient?</li>
+                <li><strong>Market Penetration:</strong> When will we hit 50% adoption?</li>
+                <li><strong>Infrastructure Planning:</strong> When should we scale servers?</li>
+            </ul>
+
+            <h2>What I Learned</h2>
+
+            <div class="highlight-box">
+                <p><strong>Technical Skills:</strong></p>
+                <ul>
+                    <li>Agent-based simulation design</li>
+                    <li>Mesa framework</li>
+                    <li>Data collection and visualization</li>
+                    <li>Parameter sensitivity analysis</li>
+                </ul>
+
+                <p><strong>Conceptual Understanding:</strong></p>
+                <ul>
+                    <li>Emergence in complex systems</li>
+                    <li>Network effects and social influence</li>
+                    <li>Calibrating models with real data</li>
+                    <li>Difference between micro-rules and macro-behavior</li>
+                </ul>
+            </div>
+
+            <h2>Next Steps</h2>
+
+            <p>I'm planning to extend this model to:</p>
+            <ol>
+                <li>Add user demographics (age, tech-savviness)</li>
+                <li>Implement churn (users can abandon features)</li>
+                <li>Test different network topologies (small-world, scale-free)</li>
+                <li>Compare with real product launch data</li>
+            </ol>
+
+            <hr style="margin: 3rem 0;">
+
+            <p><em>This project was part of my coursework at Florida Atlantic University.</em></p>
+
+            <p><strong>Questions or suggestions?</strong> Feel free to reach out via GitHub or connect with me on LinkedIn.</p>
+        </div>
+
+        <a href="../index.html#posts" class="back-link">← Back to All Posts</a>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Patrick's AI Journey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>

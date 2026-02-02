@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agent-Based Modeling vs Agent-Oriented Programming - Patrick's AI Journey</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .post-body {
+            line-height: 1.8;
+        }
+
+        .post-body h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .post-body h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .post-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-body ul, .post-body ol {
+            margin-bottom: 1.2rem;
+            margin-left: 2rem;
+        }
+
+        .post-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-body code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .post-body pre {
+            background-color: #2d2d2d;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-body pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #f8f8f2;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #f0f0f0;
+        }
+
+        .vs-badge {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            display: inline-block;
+            font-weight: bold;
+            margin: 2rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Patrick's AI Journey</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#posts">Posts</a></li>
+                <li><a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <a href="../index.html#posts" class="back-link">← Back to All Posts</a>
+
+        <header class="post-header">
+            <h1 class="post-title">Agent-Based Modeling vs Agent-Oriented Programming</h1>
+            <p class="post-meta">
+                <i class="far fa-calendar"></i> February 1, 2025 | 
+                <i class="far fa-clock"></i> 8 min read
+            </p>
+        </header>
+
+        <div class="post-body">
+            <p>After exploring Agent-Based Modeling, I discovered a related but distinct concept: <strong>Agent-Oriented Programming (AOP)</strong>. While they both involve "agents," they serve completely different purposes.</p>
+
+            <div class="highlight-box">
+                <h3>🎯 The Key Difference</h3>
+                <p><strong>Agent-Based Modeling (ABM):</strong> Research methodology for <em>understanding</em> complex systems</p>
+                <p><strong>Agent-Oriented Programming (AOP):</strong> Software engineering paradigm for <em>building</em> intelligent systems</p>
+            </div>
+
+            <h2>Think of it this way:</h2>
+            <ul>
+                <li><strong>ABM asks:</strong> "What happens when many simple things interact?"</li>
+                <li><strong>AOP asks:</strong> "How do we build intelligent software that acts autonomously?"</li>
+            </ul>
+
+            <span class="vs-badge">ABM vs AOP</span>
+
+            <h2>Agent-Based Modeling (ABM)</h2>
+
+            <h3>Purpose</h3>
+            <p>Simulation and research to understand emergent phenomena</p>
+
+            <h3>Characteristics</h3>
+            <ul>
+                <li><strong>Scale:</strong> Hundreds to millions of agents</li>
+                <li><strong>Complexity:</strong> Usually simple agents with basic rules</li>
+                <li><strong>Goal:</strong> Observe system-level patterns</li>
+                <li><strong>Tools:</strong> Mesa (Python), NetLogo, Repast</li>
+            </ul>
+
+            <h3>Example Applications</h3>
+            <ul>
+                <li><strong>Epidemiology:</strong> Disease spread simulation</li>
+                <li><strong>Economics:</strong> Market behavior modeling</li>
+                <li><strong>Urban planning:</strong> Traffic flow analysis</li>
+                <li><strong>Ecology:</strong> Population dynamics</li>
+            </ul>
+
+            <h3>Agent Design in ABM</h3>
+            <pre><code class="language-python">class SimpleAgent:
+    def __init__(self):
+        self.position = (x, y)
+        self.state = "susceptible"
+    
+    def step(self):
+        if self.neighbor_infected():
+            self.state = "infected"</code></pre>
+
+            <p><em>Agents are deliberately simplified to study system effects.</em></p>
+
+            <h2>Agent-Oriented Programming (AOP)</h2>
+
+            <h3>Purpose</h3>
+            <p>Building sophisticated, autonomous software systems</p>
+
+            <h3>Characteristics</h3>
+            <ul>
+                <li><strong>Scale:</strong> Typically dozens to hundreds of agents</li>
+                <li><strong>Complexity:</strong> Sophisticated agents with reasoning capabilities</li>
+                <li><strong>Goal:</strong> Create intelligent, goal-driven software</li>
+                <li><strong>Frameworks:</strong> JADE, Jason, SPADE, AgentSpeak</li>
+            </ul>
+
+            <h3>Example Applications</h3>
+            <ul>
+                <li><strong>Robotics:</strong> Multi-robot coordination</li>
+                <li><strong>Finance:</strong> Automated trading systems</li>
+                <li><strong>IoT:</strong> Smart home automation</li>
+                <li><strong>Enterprise:</strong> Distributed problem-solving</li>
+            </ul>
+
+            <h3>Agent Architecture in AOP</h3>
+            <pre><code class="language-python">class IntelligentAgent:
+    def __init__(self):
+        self.beliefs = {}      # What I know about the world
+        self.desires = []      # My goals
+        self.intentions = []   # My plans
+    
+    def perceive(self, environment):
+        # Update beliefs based on sensors
+        self.beliefs.update(environment.get_state())
+        
+    def deliberate(self):
+        # Choose goals based on beliefs
+        self.desires = self.goal_selection(self.beliefs)
+        
+    def plan(self):
+        # Create plan to achieve goals
+        self.intentions = self.planning(self.desires, self.beliefs)
+        
+    def act(self):
+        # Execute plan
+        action = self.intentions.pop(0)
+        return action.execute()</code></pre>
+
+            <p><em>Agents have cognitive architectures (BDI: Beliefs-Desires-Intentions).</em></p>
+
+            <h2>Side-by-Side Comparison</h2>
+
+            <table class="comparison-table">
+                <thead>
+                    <tr>
+                        <th>Aspect</th>
+                        <th>ABM</th>
+                        <th>AOP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Primary Use</strong></td>
+                        <td>Research/Analysis</td>
+                        <td>Software Development</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agent Count</strong></td>
+                        <td>Thousands+</td>
+                        <td>Tens to hundreds</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Agent Complexity</strong></td>
+                        <td>Simple rules</td>
+                        <td>Complex reasoning</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Communication</strong></td>
+                        <td>Limited/implicit</td>
+                        <td>Explicit protocols</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Goal</strong></td>
+                        <td>Understand emergence</td>
+                        <td>Build intelligent systems</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Output</strong></td>
+                        <td>Insights, patterns</td>
+                        <td>Working software</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Typical Fields</strong></td>
+                        <td>Social science, Biology, Economics</td>
+                        <td>AI, Robotics, Distributed Systems</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>When to Use Each?</h2>
+
+            <div class="highlight-box">
+                <h3>Use ABM when you want to:</h3>
+                <ul>
+                    <li>Understand how system-level behavior emerges</li>
+                    <li>Test "what-if" scenarios</li>
+                    <li>Study social/biological/economic phenomena</li>
+                    <li>Validate theories about complex systems</li>
+                </ul>
+            </div>
+
+            <div class="highlight-box" style="background-color: #fff3e0; border-left: 4px solid var(--accent-color);">
+                <h3>Use AOP when you want to:</h3>
+                <ul>
+                    <li>Build autonomous robots or drones</li>
+                    <li>Create self-organizing systems</li>
+                    <li>Develop distributed AI applications</li>
+                    <li>Implement intelligent automation</li>
+                </ul>
+            </div>
+
+            <h2>Real-World Examples</h2>
+
+            <h3>ABM Example: COVID-19 Spread</h3>
+            <p>Researchers used ABM to simulate how social distancing policies would affect disease spread. Each agent represented a person with simple rules:</p>
+            <ul>
+                <li>Move around a grid</li>
+                <li>If near infected person → chance of infection</li>
+                <li>After X days → recover or die</li>
+            </ul>
+            <p>Result: Policymakers could test interventions before implementing them.</p>
+
+            <h3>AOP Example: Warehouse Robots</h3>
+            <p>Amazon's warehouse uses AOP-style robots that:</p>
+            <ul>
+                <li><strong>Perceive:</strong> Detect location, obstacles, packages</li>
+                <li><strong>Plan:</strong> Calculate optimal path to destination</li>
+                <li><strong>Communicate:</strong> Negotiate right-of-way with other robots</li>
+                <li><strong>Act:</strong> Move packages autonomously</li>
+            </ul>
+            <p>Result: Efficient, adaptive warehouse automation.</p>
+
+            <h2>My Learning Path</h2>
+
+            <p>For my data science career, <strong>ABM is more immediately relevant</strong> because:</p>
+            <ol>
+                <li>Simulating user behavior and market dynamics</li>
+                <li>Testing business strategies before implementation</li>
+                <li>Forecasting adoption curves</li>
+                <li>A/B testing at scale</li>
+            </ol>
+
+            <p>However, <strong>AOP becomes valuable</strong> as I move toward:</p>
+            <ul>
+                <li>Building autonomous analytics systems</li>
+                <li>Multi-agent data processing pipelines</li>
+                <li>Intelligent data collection bots</li>
+                <li>Automated decision systems</li>
+            </ul>
+
+            <h2>Code Comparison Example</h2>
+
+            <h3>ABM: Simplified Agent</h3>
+            <pre><code class="language-python"># ABM - Simple simulation agent
+class Citizen(mesa.Agent):
+    def __init__(self, model):
+        super().__init__(model)
+        self.infected = False
+        self.immune = False
+    
+    def step(self):
+        # Very simple rule
+        neighbors = self.model.grid.get_neighbors(self.pos)
+        if any(n.infected for n in neighbors):
+            if random.random() < 0.3:  # 30% infection chance
+                self.infected = True</code></pre>
+
+            <h3>AOP: Intelligent Agent</h3>
+            <pre><code class="language-python"># AOP - Complex intelligent agent
+class WarehouseRobot(Agent):
+    def __init__(self, agent_id):
+        self.beliefs = {
+            'location': (0, 0),
+            'packages': [],
+            'obstacles': []
+        }
+        self.goals = ['deliver_packages', 'avoid_collisions']
+        self.plan = []
+    
+    def perceive(self, sensors):
+        # Update world model from sensors
+        self.beliefs['location'] = sensors.get_position()
+        self.beliefs['obstacles'] = sensors.detect_obstacles()
+    
+    def deliberate(self):
+        # Decide what to do based on current state
+        if len(self.beliefs['packages']) > 0:
+            self.goals = ['deliver_packages']
+        else:
+            self.goals = ['find_packages']
+    
+    def plan_path(self):
+        # Complex path planning algorithm
+        self.plan = a_star_search(
+            self.beliefs['location'],
+            self.goals[0],
+            self.beliefs['obstacles']
+        )
+    
+    def execute(self):
+        # Perform next action in plan
+        if self.plan:
+            next_action = self.plan.pop(0)
+            next_action.execute()</code></pre>
+
+            <h2>Resources I'm Using</h2>
+
+            <div class="highlight-box">
+                <h3>📚 Agent-Based Modeling</h3>
+                <ul>
+                    <li><a href="https://mesa.readthedocs.io/" target="_blank">Mesa Documentation</a></li>
+                    <li>"Think Complexity" by Allen Downey</li>
+                    <li><a href="https://ccl.northwestern.edu/netlogo/models/" target="_blank">NetLogo Models Library</a></li>
+                </ul>
+
+                <h3>📚 Agent-Oriented Programming</h3>
+                <ul>
+                    <li>"An Introduction to MultiAgent Systems" by Michael Wooldridge</li>
+                    <li><a href="https://jade.tilab.com/" target="_blank">JADE Framework</a></li>
+                    <li>AgentSpeak Language Documentation</li>
+                </ul>
+            </div>
+
+            <h2>Conclusion</h2>
+
+            <p>Both paradigms deal with "agents," but serve different purposes:</p>
+            <ul>
+                <li><strong>ABM:</strong> Simulate to understand</li>
+                <li><strong>AOP:</strong> Build to automate</li>
+            </ul>
+
+            <p>As a data scientist, I'll primarily use <strong>ABM for analysis and simulation</strong>, but understanding AOP gives me insights into building more sophisticated automated systems for data collection, processing, and decision-making.</p>
+
+            <div class="highlight-box" style="background-color: #f3e5f5; border-left: 4px solid var(--secondary-color);">
+                <h3>🔑 Key Takeaway</h3>
+                <p>The distinction isn't just academic—it's practical. When you're trying to <em>understand</em> how something works, use ABM. When you're trying to <em>build</em> something intelligent, use AOP.</p>
+            </div>
+
+            <hr style="margin: 3rem 0;">
+
+            <p><em>Part of my ongoing exploration of AI and multi-agent systems at Florida Atlantic University.</em></p>
+
+            <p><strong>Questions or thoughts?</strong> I'd love to discuss these concepts further. Feel free to reach out!</p>
+        </div>
+
+        <a href="../index.html#posts" class="back-link">← Back to All Posts</a>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Patrick's AI Journey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
