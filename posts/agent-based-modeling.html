@@ -186,7 +186,7 @@
             <p>Each agent (user) has:</p>
             <ul>
                 <li><strong>Position:</strong> Location on a social network grid</li>
-                <li><strong>Influence threshold:</strong> % of neighbors needed to convince them</li>
+                <li><strong>Influence threshold:</strong> Percentage of neighbors needed to convince them</li>
                 <li><strong>Adoption status:</strong> Have they adopted the feature?</li>
             </ul>
 
@@ -216,14 +216,14 @@ class SocialMediaUser(mesa.Agent):
                 if adoption_rate > self.influence_threshold:
                     self.adopted_feature = True</code></pre>
 
-            <h2>Results & Insights</h2>
+            <h2>Results and Insights</h2>
 
             <h3>Key Findings:</h3>
 
             <ol>
                 <li><strong>Network Effects Matter:</strong> Adoption spreads like ripples in water through social connections</li>
-                <li><strong>Critical Mass / Tipping Point:</strong> Once ~30-40% of a neighborhood adopts, growth accelerates dramatically</li>
-                <li><strong>Early Adopters are Crucial:</strong> Seeding with just 5% vs 20% early adopters cut time-to-50%-adoption by ~75%</li>
+                <li><strong>Critical Mass / Tipping Point:</strong> Once approximately 30-40% of a neighborhood adopts, growth accelerates dramatically</li>
+                <li><strong>Early Adopters are Crucial:</strong> Seeding with just 5% versus 20% early adopters cut time-to-50%-adoption by approximately 75%</li>
                 <li><strong>Spatial Clustering:</strong> Adoption forms geographic clusters before spreading, creating "islands" of users</li>
             </ol>
 
