@@ -1,6 +1,13 @@
 // Blog posts data
 const posts = [
     {
+        title: "ML Prediction Bias: Understanding Confusion Matrices in Fraud Detection",
+        date: "February 2, 2025",
+        excerpt: "Exploring how ML classification models detect credit card fraud, understanding confusion matrices and performance metrics, and examining prediction bias in banking and finance.",
+        tags: ["Machine Learning", "Bias", "Classification", "Banking"],
+        link: "posts/ml-prediction-bias.html"
+    },
+    {
         title: "Agent-Based Modeling: Simulating Social Feature Adoption",
         date: "February 1, 2025",
         excerpt: "Exploring Agent-Based Modeling through a social media feature adoption simulation. Learn how simple rules create complex emergent behavior.",
