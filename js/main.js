@@ -1,6 +1,13 @@
 // Blog posts data
 const posts = [
     {
+        title: "MedMNIST Visual AI Model Comparison: When Simplicity Beats Complexity",
+        date: "February 3, 2025",
+        excerpt: "Exploring whether complex models always perform better by comparing six computer vision architectures on medical imaging data. The surprising results challenge conventional wisdom.",
+        tags: ["Computer Vision", "Medical Imaging", "Transfer Learning", "Deep Learning"],
+        link: "posts/medmnist-model-comparison.html"
+    },
+    {
         title: "ML Prediction Bias: Understanding Confusion Matrices in Fraud Detection",
         date: "February 2, 2025",
         excerpt: "Exploring how ML classification models detect credit card fraud, understanding confusion matrices and performance metrics, and examining prediction bias in banking and finance.",

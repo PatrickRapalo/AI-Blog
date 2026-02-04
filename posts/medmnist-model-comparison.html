@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedMNIST Model Comparison - Patrick's AI Journey</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .post-body {
+            line-height: 1.8;
+        }
+
+        .post-body h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .post-body h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .post-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-body ul, .post-body ol {
+            margin-bottom: 1.2rem;
+            margin-left: 2rem;
+        }
+
+        .post-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-body code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .post-body pre {
+            background-color: #2d2d2d;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-body pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #f8f8f2;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .highlight-box ul {
+            margin-bottom: 0;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 2rem 0;
+            font-size: 0.95rem;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            text-align: center;
+        }
+
+        .comparison-table th {
+            background-color: var(--primary-color);
+            color: white;
+            font-weight: bold;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #e3f2fd;
+        }
+
+        .comparison-table td:first-child {
+            font-weight: bold;
+            text-align: left;
+        }
+
+        .metric-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .metric-card .metric-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .metric-card .metric-value {
+            font-family: 'Courier New', monospace;
+            background-color: #e8e8e8;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .image-container {
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .image-container img {
+            max-width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .image-caption {
+            font-style: italic;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+
+        .image-placeholder {
+            background-color: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 10px;
+            padding: 3rem 2rem;
+            margin: 2rem 0;
+            text-align: center;
+            color: #888;
+        }
+
+        .image-placeholder i {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .architecture-block {
+            background-color: #f8f9fa;
+            border: 1px solid #e9ecef;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem 0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            line-height: 1.6;
+        }
+
+        .model-section {
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #eee;
+        }
+
+        .model-section:last-child {
+            border-bottom: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Patrick's AI Journey</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#posts">Posts</a></li>
+                <li><a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+
+        <header class="post-header">
+            <h1 class="post-title">MedMNIST Visual AI Model Comparison: When Simplicity Beats Complexity</h1>
+            <p class="post-meta">
+                <i class="far fa-calendar"></i> February 3, 2025 |
+                <i class="far fa-clock"></i> 15 min read
+            </p>
+        </header>
+
+        <div class="post-body">
+            <p>For my AI for Science class, I embarked on an experiment to answer a fundamental question in machine learning: <strong>Do more complex models always perform better?</strong> To investigate this, I tested six different computer vision models on the RetinaMNIST dataset—three trained from scratch and three leveraging pre-trained weights from ImageNet. The results challenged conventional wisdom and provided valuable insights into the relationship between model complexity, dataset size, and image resolution.</p>
+
+            <h2>The Challenge: Medical Image Classification</h2>
+
+            <p>Medical image analysis presents unique challenges compared to natural image classification. The RetinaMNIST dataset, derived from the STARE (Structured Analysis of the Retina) project, contains fundus photography images used to diagnose various retinal diseases. Each image is labeled with one of five disease categories, making this a multi-class classification problem with direct real-world medical applications.</p>
+
+            <h3>Dataset Overview: RetinaMNIST</h3>
+
+            <p>The RetinaMNIST dataset is part of the larger MedMNIST+ collection, a standardized benchmark specifically designed for medical image analysis. Key characteristics include:</p>
+
+            <ul>
+                <li><strong>Original Resolution:</strong> 28×28 pixels (standardized from higher-resolution STARE images)</li>
+                <li><strong>MedMNIST+ Resolution:</strong> Also available in 64×64, 128×128, and 224×224</li>
+                <li><strong>Number of Classes:</strong> 5 retinal disease categories</li>
+                <li><strong>Dataset Size:</strong> Approximately 1,600 images total
+                    <ul>
+                        <li>Training set: ~1,080 images</li>
+                        <li>Validation set: ~120 images</li>
+                        <li>Test set: ~400 images</li>
+                    </ul>
+                </li>
+                <li><strong>Color Channels:</strong> 3 (RGB)</li>
+                <li><strong>Clinical Relevance:</strong> Real medical imaging data with diagnostic implications</li>
+            </ul>
+
+            <p>I chose this dataset for two practical reasons: the relatively small size works well within Google Colab's memory constraints, and the pre-processing eliminates the need for extensive domain knowledge, allowing me to focus on model architecture comparisons.</p>
+
+            <h2>Methodology: Six Models, Two Resolutions</h2>
+
+            <p>To conduct a comprehensive comparison, I tested six distinct model architectures across two image resolutions (28×28 and 224×224). This experimental design allows us to evaluate both the impact of model complexity and the benefits of higher resolution data.</p>
+
+            <h2>Custom Models (Trained from Scratch)</h2>
+
+            <div class="model-section">
+                <h3>1. Linear Model</h3>
+
+                <p>The simplest possible classifier—essentially logistic regression applied directly to flattened pixel values.</p>
+
+                <div class="architecture-block">
+Input: [batch, 3, 28, 28] → Flatten: [batch, 2,352]
+            ↓
+Linear layer: [batch, 2,352] → [batch, 5]
+                </div>
+
+                <div class="metric-card">
+                    <p class="metric-name">Characteristics</p>
+                    <ul>
+                        <li><strong>Parameters:</strong> ~12,000</li>
+                        <li><strong>Spatial Awareness:</strong> None (treats each pixel independently)</li>
+                        <li><strong>Computational Cost:</strong> Extremely low</li>
+                        <li><strong>Training Philosophy:</strong> No hidden layers, no feature extraction—pure linear transformation</li>
+                    </ul>
+                </div>
+
+                <p>This serves as our baseline model. In theory, it should be the worst performer since it can't learn non-linear patterns or understand spatial relationships in images.</p>
+            </div>
+
+            <div class="model-section">
+                <h3>2. Multi-Layer Perceptron (MLP)</h3>
+
+                <p>A fully-connected deep neural network with multiple hidden layers.</p>
+
+                <div class="architecture-block">
+Input: [batch, 2,352]
+            ↓
+Dense Layer: 2,352 → 512 (+ ReLU + Dropout 0.3)
+            ↓
+Dense Layer: 512 → 256 (+ ReLU + Dropout 0.3)
+            ↓
+Dense Layer: 256 → 128 (+ ReLU + Dropout 0.3)
+            ↓
+Output Layer: 128 → 5
+                </div>
+
+                <div class="metric-card">
+                    <p class="metric-name">Characteristics</p>
+                    <ul>
+                        <li><strong>Parameters:</strong> ~1.5 million</li>
+                        <li><strong>Non-linearity:</strong> ReLU activations enable complex pattern learning</li>
+                        <li><strong>Regularization:</strong> Dropout layers prevent overfitting</li>
+                        <li><strong>Limitation:</strong> Still no spatial awareness—images are flattened before processing</li>
+                    </ul>
+                </div>
+
+                <p>The MLP represents traditional deep learning before the convolutional revolution. It can learn complex non-linear relationships but treats the image as a 1D vector of independent features.</p>
+            </div>
+
+            <div class="model-section">
+                <h3>3. Convolutional Neural Network (CNN)</h3>
+
+                <p>A custom architecture specifically designed to extract hierarchical spatial features.</p>
+
+                <div class="architecture-block">
+Block 1: Conv2d(3→32, 3×3) + ReLU + MaxPool → 14×14
+Block 2: Conv2d(32→64, 3×3) + ReLU + MaxPool → 7×7
+Block 3: Conv2d(64→128, 3×3) + ReLU
+            ↓
+Flatten: 128×7×7 = 6,272
+            ↓
+Dense: 6,272 → 256 (+ ReLU + Dropout 0.5)
+Dense: 256 → 5
+                </div>
+
+                <div class="metric-card">
+                    <p class="metric-name">Characteristics</p>
+                    <ul>
+                        <li><strong>Parameters:</strong> ~500,000</li>
+                        <li><strong>Spatial Awareness:</strong> Convolutional layers detect edges, textures, and patterns</li>
+                        <li><strong>Translation Invariance:</strong> Same features detected regardless of location</li>
+                        <li><strong>Hierarchical Learning:</strong> Early layers find simple features (edges), later layers combine them into complex patterns (blood vessels, lesions)</li>
+                    </ul>
+                </div>
+
+                <p>This architecture applies computer vision principles: use convolutions to understand spatial structure, use pooling to reduce dimensions while maintaining important features.</p>
+            </div>
+
+            <h2>Pre-trained Models (Transfer Learning)</h2>
+
+            <div class="model-section">
+                <h3>4. AlexNet (2012)</h3>
+
+                <p>The pioneering deep CNN that won ImageNet 2012 and sparked the deep learning revolution.</p>
+
+                <div class="metric-card">
+                    <p class="metric-name">Architecture Highlights</p>
+                    <ul>
+                        <li>8 learned layers (5 convolutional, 3 fully-connected)</li>
+                        <li>60 million parameters</li>
+                        <li>ReLU activations (revolutionary at the time)</li>
+                        <li>Trained on 1.2 million ImageNet images</li>
+                    </ul>
+                </div>
+
+                <p><strong>Adaptation for RetinaMNIST:</strong> Requires 224×224 input (original images must be resized), final layer replaced from 4,096 → 5 classes.</p>
+
+                <p><strong>Transfer Learning Hypothesis:</strong> Features learned from natural images (edges, textures, shapes) should transfer to medical images.</p>
+            </div>
+
+            <div class="model-section">
+                <h3>5. ResNet-50 (2015)</h3>
+
+                <p>A state-of-the-art CNN that solved the vanishing gradient problem through residual connections.</p>
+
+                <div class="highlight-box">
+                    <p><strong>Key Innovation:</strong> Skip connections allow gradients to flow through the network.</p>
+                    <p>Instead of: <code>output = F(x)</code></p>
+                    <p>ResNet uses: <code>output = F(x) + x</code></p>
+                </div>
+
+                <div class="metric-card">
+                    <p class="metric-name">Architecture Highlights</p>
+                    <ul>
+                        <li>50 layers deep</li>
+                        <li>25 million parameters</li>
+                        <li>Residual blocks enable training very deep networks</li>
+                        <li>Won ImageNet 2015</li>
+                        <li>Final layer: 2,048 → 5 classes for our task</li>
+                    </ul>
+                </div>
+
+                <p><strong>Why It Matters:</strong> Depth allows learning more abstract, hierarchical features. The skip connections prevent performance degradation as networks get deeper.</p>
+            </div>
+
+            <div class="model-section">
+                <h3>6. Vision Transformer (ViT, 2020)</h3>
+
+                <p>A completely different paradigm: treating images as sequences of patches, not pixels.</p>
+
+                <div class="highlight-box">
+                    <p><strong>Revolutionary Concept:</strong> Apply Transformer architecture (from NLP) to computer vision.</p>
+                </div>
+
+                <p><strong>How It Works:</strong></p>
+                <ol>
+                    <li>Split 224×224 image into 16×16 patches → 196 patches</li>
+                    <li>Flatten each patch and project to 768-dimensional embedding</li>
+                    <li>Add positional encodings (so model knows patch locations)</li>
+                    <li>Process through 12 Transformer encoder blocks with multi-head self-attention</li>
+                    <li>Classification head: 768 → 5</li>
+                </ol>
+
+                <div class="metric-card">
+                    <p class="metric-name">Key Differences from CNNs</p>
+                    <ul>
+                        <li><strong>No convolutions at all</strong></li>
+                        <li><strong>Global attention:</strong> Every patch can "attend to" every other patch from layer 1</li>
+                        <li><strong>Self-attention:</strong> Model learns which image regions are relevant to each other</li>
+                        <li><strong>Parameters:</strong> 86 million</li>
+                        <li>State-of-the-art on large datasets, but typically needs massive data to train from scratch</li>
+                    </ul>
+                </div>
+            </div>
+
+            <h2>Experiment 1: Native 28×28 Resolution</h2>
+
+            <h3>Training Configuration</h3>
+
+            <ul>
+                <li><strong>Epochs:</strong> 20 (with early stopping, patience=5)</li>
+                <li><strong>Batch Size:</strong> 64</li>
+                <li><strong>Optimizer:</strong> Adam</li>
+                <li><strong>Learning Rates:</strong> Custom models: 0.001 | Pre-trained models: 0.0001</li>
+                <li><strong>Regularization:</strong> Dropout, learning rate scheduling</li>
+                <li><strong>Hardware:</strong> Google Colab (GPU-accelerated)</li>
+            </ul>
+
+            <h3>Results: The Shocking Winner</h3>
+
+            <!-- IMAGE PLACEHOLDER: Add your 28x28 results chart/table here -->
+            <div class="image-container">
+                <img src="../assets/28x28-results.png" alt="28x28 Resolution Results">
+                <p class="image-caption">Model comparison results at 28×28 resolution</p>
+            </div>
+
+            <p><strong>The simple Linear model won!</strong> This completely defied my expectations—and conventional machine learning wisdom.</p>
+
+            <h2>Analysis: Why Did Complexity Lose?</h2>
+
+            <h3>1. The Overfitting Problem</h3>
+
+            <p>Look at the generalization gap (validation accuracy - test accuracy):</p>
+
+            <ul>
+                <li><strong>Linear:</strong> 3.25% gap → Good generalization</li>
+                <li><strong>ResNet-50:</strong> 9.67% gap → Severe overfitting</li>
+                <li><strong>CNN:</strong> 8.17% gap → Moderate overfitting</li>
+            </ul>
+
+            <p><strong>What happened?</strong> The complex models with millions of parameters "memorized" the small training set rather than learning generalizable patterns. With only ~1,080 training images, there simply isn't enough data to properly train 25-86 million parameters.</p>
+
+            <h3>2. The Domain Mismatch Problem</h3>
+
+            <p>Pre-trained models learned features from ImageNet:</p>
+            <ul>
+                <li>Cat whiskers, dog ears, car wheels</li>
+                <li>Natural lighting, backgrounds, textures</li>
+                <li>Object-centric compositions</li>
+            </ul>
+
+            <p>But RetinaMNIST contains:</p>
+            <ul>
+                <li>Blood vessels, optic discs, lesions</li>
+                <li>Uniform fundus photography lighting</li>
+                <li>Medical imaging artifacts</li>
+            </ul>
+
+            <p><strong>The mismatch:</strong> A ResNet trained to detect "fur texture" doesn't directly transfer to detecting "retinal hemorrhages." The low-level features (edges) transfer well, but high-level features don't.</p>
+
+            <h3>3. The Resolution Problem</h3>
+
+            <p>Here's the critical issue: <strong>The 224×224 images fed to pre-trained models were UPSAMPLED from 28×28.</strong></p>
+
+            <ul>
+                <li>Original: 28×28 = 784 real pixels</li>
+                <li>Upsampled: 224×224 = 50,176 pixels (64× more!)</li>
+            </ul>
+
+            <p>But those extra 49,392 pixels are <strong>interpolated—artificial data created by the resize algorithm</strong>. The pre-trained models expected genuine 224×224 photographs with real high-frequency details. Instead, they got blurry, smoothed images with interpolation artifacts.</p>
+
+            <p><strong>The Linear model's advantage:</strong> It worked with the raw 28×28 data. No upsampling noise, no false complexity—just the real pixels.</p>
+
+            <h3>4. The Simplicity Advantage</h3>
+
+            <p>With only 2,352 input features and 5 output classes, the Linear model had just enough capacity to:</p>
+            <ul>
+                <li>Learn basic pixel intensity patterns</li>
+                <li>Avoid overfitting on the small dataset</li>
+                <li>Train in 3.6 seconds (vs. 12.91 minutes for ViT)</li>
+            </ul>
+
+            <div class="highlight-box">
+                <p><strong>Occam's Razor in action:</strong> The simplest model that fits the data often generalizes best.</p>
+            </div>
+
+            <h2>Key Insight: Transfer Learning Isn't Always Better</h2>
+
+            <p>This experiment demonstrates that transfer learning has prerequisites:</p>
+
+            <ol>
+                <li><strong>Sufficient target dataset size</strong> (at least thousands of images)</li>
+                <li><strong>Domain similarity</strong> (ImageNet → medical imaging is a stretch)</li>
+                <li><strong>Appropriate resolution</strong> (native, not upsampled)</li>
+                <li><strong>Proper fine-tuning strategy</strong> (freeze layers, adjust learning rates)</li>
+            </ol>
+
+            <p>When these conditions aren't met, simpler models can outperform sophisticated pre-trained architectures.</p>
+
+            <h2>Experiment 2: Native 224×224 Resolution (MedMNIST+)</h2>
+
+            <p>After discovering that upsampling was likely hurting the pre-trained models, I repeated the experiment using <strong>true native 224×224 images</strong> from the MedMNIST+ collection. This provides genuine high-resolution data rather than interpolated pixels.</p>
+
+            <h3>Why This Changes Everything</h3>
+
+            <p>The native high-resolution images contain:</p>
+            <ul>
+                <li>Fine blood vessel structures</li>
+                <li>Subtle lesion textures</li>
+                <li>Genuine optical artifacts</li>
+                <li>Real spatial frequency information</li>
+            </ul>
+
+            <!-- IMAGE PLACEHOLDER: Add your 224x224 results here (if available) -->
+            <div class="image-container">
+                <img src="../assets/224x224-results.png" alt="224x224 Resolution Results">
+                <p class="image-caption">Model comparison results at native 224×224 resolution</p>
+            </div>
+
+            <h3>Expected Results</h3>
+
+            <p>With genuine high-resolution data, the performance ranking should flip to match conventional expectations:</p>
+
+            <ul>
+                <li><strong>224×224:</strong> ResNet-50 / ViT > AlexNet > CNN > MLP > Linear</li>
+                <li><strong>28×28:</strong> Linear > CNN > MLP > AlexNet > ResNet-50 > ViT</li>
+            </ul>
+
+            <h2>Discussion: Lessons for Applied Machine Learning</h2>
+
+            <h3>1. Match Model Complexity to Dataset Size</h3>
+
+            <p><strong>Rule of thumb:</strong> You need approximately 10× more training samples than model parameters to avoid overfitting.</p>
+
+            <ul>
+                <li><strong>Linear (12K params):</strong> Needs ~120K samples → Had 1,080 (but underfitting likely)</li>
+                <li><strong>ResNet-50 (25M params):</strong> Needs ~250M samples → Had 1,080 (severe overfitting)</li>
+            </ul>
+
+            <p><strong>Practical implication:</strong> For small medical imaging datasets (<10K images), consider simpler architectures, aggressive regularization, domain-specific pre-training, or few-shot learning techniques.</p>
+
+            <h3>2. Resolution Matters—But Only If It's Real</h3>
+
+            <p>Upsampling doesn't create information; it creates noise. When working with pre-trained models:</p>
+            <ul>
+                <li>Use native resolution whenever possible</li>
+                <li>If upsampling is necessary, test different interpolation methods</li>
+                <li>Consider models designed for smaller inputs (MobileNet, EfficientNet)</li>
+            </ul>
+
+            <h3>3. Transfer Learning Has Requirements</h3>
+
+            <p>Transfer learning provides the most benefit when:</p>
+            <ul>
+                <li><strong>Large source dataset:</strong> ImageNet's 14M images</li>
+                <li><strong>Similar domains:</strong> Natural images → Object detection (good); Natural images → Medical imaging (questionable)</li>
+                <li><strong>Sufficient fine-tuning data:</strong> At least thousands of target domain images</li>
+                <li><strong>Appropriate architecture:</strong> Match input requirements</li>
+            </ul>
+
+            <h3>4. Start Simple, Then Increase Complexity</h3>
+
+            <p>The scientific method for model selection:</p>
+            <ol>
+                <li>Establish a simple baseline (Linear, Logistic Regression)</li>
+                <li>Try classical ML (Random Forest, SVM)</li>
+                <li>Attempt shallow neural networks (MLP)</li>
+                <li>Progress to CNNs if spatial structure matters</li>
+                <li>Try transfer learning if data is sufficient</li>
+                <li>Consider Transformers only for large-scale problems</li>
+            </ol>
+
+            <p><strong>Don't skip to step 6!</strong></p>
+
+            <h3>5. Evaluation Metrics Beyond Accuracy</h3>
+
+            <p>For medical imaging, consider:</p>
+            <ul>
+                <li><strong>Sensitivity/Recall:</strong> How many positive cases did we catch?</li>
+                <li><strong>Specificity:</strong> How many negative cases did we correctly identify?</li>
+                <li><strong>F1 Score:</strong> Balance between precision and recall</li>
+                <li><strong>AUC-ROC:</strong> Classification performance across thresholds</li>
+                <li><strong>Confusion Matrix:</strong> Which specific classes are confused?</li>
+            </ul>
+
+            <p>In medical diagnosis, <strong>false negatives</strong> (missing a disease) can be more costly than <strong>false positives</strong> (unnecessary follow-up). Model selection should account for these trade-offs.</p>
+
+            <h2>When to Use Each Model Type</h2>
+
+            <div class="metric-card">
+                <p class="metric-name">Linear Models</p>
+                <ul>
+                    <li>Rapid prototyping and baselines</li>
+                    <li>Small datasets (<1,000 samples)</li>
+                    <li>When interpretability is critical</li>
+                    <li>Resource-constrained deployment (mobile, edge devices)</li>
+                </ul>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">MLPs</p>
+                <ul>
+                    <li>Non-spatial data (tabular, time series)</li>
+                    <li>When you need non-linearity but not spatial structure</li>
+                    <li>Ensembling with other models</li>
+                </ul>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">Custom CNNs</p>
+                <ul>
+                    <li>Domain-specific problems where pre-trained models don't exist</li>
+                    <li>When you have 10K+ training images</li>
+                    <li>Transfer learning is impractical</li>
+                </ul>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">Pre-trained CNNs (ResNet, AlexNet)</p>
+                <ul>
+                    <li>Natural image tasks similar to ImageNet</li>
+                    <li>When you have 1K-10K training images</li>
+                    <li>Fine-tuning from domain-relevant checkpoints</li>
+                </ul>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">Vision Transformers (ViT)</p>
+                <ul>
+                    <li>Large-scale datasets (>100K images)</li>
+                    <li>When global context matters more than local features</li>
+                    <li>Research and cutting-edge applications</li>
+                    <li>When computational resources are abundant</li>
+                </ul>
+            </div>
+
+            <h2>Conclusion: Rethinking Model Selection</h2>
+
+            <p>This experiment revealed a counterintuitive but important lesson: <strong>complexity is not always better, especially with limited data.</strong></p>
+
+            <div class="highlight-box">
+                <p><strong>Key Takeaways:</strong></p>
+                <ul>
+                    <li>The Linear model won at 28×28 resolution by avoiding overfitting on the small dataset, working with genuine pixel data, and training 200× faster than Vision Transformers</li>
+                    <li>Pre-trained models underperformed because they required upsampled images with interpolation noise, ImageNet features don't transfer well to medical imaging, and millions of parameters drastically overfit 1,080 training samples</li>
+                    <li>Native 224×224 resolution should change the results by providing genuine high-resolution features for pre-trained models to leverage</li>
+                    <li>Always start with simple baselines—you might be surprised by the results</li>
+                </ul>
+            </div>
+
+            <h3>Broader Implications for AI in Science</h3>
+
+            <p><strong>Occam's Razor Still Applies:</strong> The simplest model that adequately fits the data often generalizes best. Don't reach for transformers when logistic regression suffices.</p>
+
+            <p><strong>Transfer Learning Isn't Magic:</strong> Pre-trained models require careful consideration of domain similarity, data quantity, and resolution compatibility.</p>
+
+            <p><strong>Data Quality > Model Complexity:</strong> Authentic high-resolution data matters more than sophisticated architectures. Garbage in, garbage out—even for state-of-the-art models.</p>
+
+            <p><strong>Validate Everything:</strong> My initial assumption that "ResNet-50 will dominate" was wrong. Always run experiments rather than relying on intuition or conventional wisdom.</p>
+
+            <p>In an era where cutting-edge AI often means billion-parameter models, this experiment serves as a reminder that machine learning is fundamentally about <strong>matching the right tool to the problem</strong>. Sometimes, that means the oldest algorithm in the book wins.</p>
+
+            <hr style="margin: 3rem 0;">
+
+            <p><strong>Dataset Citation:</strong> Yang, J., Shi, R., Wei, D., Liu, Z., Zhao, L., Ke, B., ... & Yang, J. (2023). MedMNIST v2-A large-scale lightweight benchmark for 2D and 3D biomedical image classification. <em>Scientific Data</em>, 10(1), 41.</p>
+
+            <p><em>This post was based on a project completed as part of my AI for Science coursework at Florida Atlantic University.</em></p>
+
+            <p><strong>Questions or suggestions?</strong> Feel free to reach out via GitHub or connect with me on LinkedIn.</p>
+        </div>
+
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Patrick's AI Journey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
