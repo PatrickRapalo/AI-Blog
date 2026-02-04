@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Desktop\\\\AI-Blog\" status)",
+      "Bash(git -C \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Desktop\\\\AI-Blog\" log --oneline -5)",
+      "Bash(git -C \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Desktop\\\\AI-Blog\" diff --stat)",
+      "Bash(git -C \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Desktop\\\\AI-Blog\" diff posts/agent-based-modeling.html)",
+      "Bash(git -C \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Desktop\\\\AI-Blog\" add posts/ml-prediction-bias.html js/main.js)",
+      "Bash(git -C \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Desktop\\\\AI-Blog\" commit -m \"$\\(cat <<''EOF''\nAdd new blog post: ML Prediction Bias in Fraud Detection\n\nNew post covering confusion matrices, performance metrics, and prediction\nbias in credit card fraud detection for banking and finance.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
+      "Bash(git -C \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Desktop\\\\AI-Blog\" push)"
+    ]
+  }
+}
