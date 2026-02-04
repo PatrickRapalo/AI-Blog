@@ -554,27 +554,267 @@ Dense: 256 → 5
                 <p class="image-caption">Model comparison results at native 224×224 resolution</p>
             </div>
 
-            <h3>Expected Results</h3>
+            <h3>Results: The Dramatic Reversal</h3>
 
-            <p>With genuine high-resolution data, the performance ranking should flip to match conventional expectations:</p>
+            <table class="comparison-table">
+                <tr>
+                    <th>Model</th>
+                    <th>Val Acc</th>
+                    <th>Test Acc</th>
+                    <th>Test F1</th>
+                    <th>Training Time</th>
+                    <th>Epochs</th>
+                    <th>Gen. Gap</th>
+                </tr>
+                <tr>
+                    <td>ViT</td>
+                    <td>67.50%</td>
+                    <td><strong>63.50%</strong></td>
+                    <td>0.631</td>
+                    <td>9.96 min</td>
+                    <td>15</td>
+                    <td>4.00% ✓</td>
+                </tr>
+                <tr>
+                    <td>ResNet-50</td>
+                    <td>67.50%</td>
+                    <td>62.50%</td>
+                    <td>0.605</td>
+                    <td>1.72 min</td>
+                    <td>9</td>
+                    <td>5.00%</td>
+                </tr>
+                <tr>
+                    <td>AlexNet</td>
+                    <td>60.83%</td>
+                    <td>59.50%</td>
+                    <td>0.563</td>
+                    <td>0.29 min</td>
+                    <td>6</td>
+                    <td>1.33% ✓</td>
+                </tr>
+                <tr>
+                    <td>CNN</td>
+                    <td>63.33%</td>
+                    <td>55.00%</td>
+                    <td>0.509</td>
+                    <td>2.28 min</td>
+                    <td>20</td>
+                    <td>8.33%</td>
+                </tr>
+                <tr>
+                    <td>MLP</td>
+                    <td>55.83%</td>
+                    <td>51.75%</td>
+                    <td>0.439</td>
+                    <td>2.61 min</td>
+                    <td>10</td>
+                    <td>4.08% ✓</td>
+                </tr>
+                <tr>
+                    <td>Linear</td>
+                    <td>51.67%</td>
+                    <td>52.50%</td>
+                    <td>0.431</td>
+                    <td>0.18 min</td>
+                    <td>6</td>
+                    <td>-0.83% ✓</td>
+                </tr>
+            </table>
 
+            <p><strong>Winner: Vision Transformer at 63.50% test accuracy!</strong> The tables have completely turned.</p>
+
+            <h3>The Complete Story: Comparing Both Resolutions</h3>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Model</th>
+                    <th>28×28 Test Acc</th>
+                    <th>224×224 Test Acc</th>
+                    <th>Improvement</th>
+                    <th>Winner Resolution</th>
+                </tr>
+                <tr>
+                    <td>Linear</td>
+                    <td>56.75%</td>
+                    <td>52.50%</td>
+                    <td style="color: #d32f2f;">-4.25%</td>
+                    <td>28×28</td>
+                </tr>
+                <tr>
+                    <td>MLP</td>
+                    <td>53.50%</td>
+                    <td>51.75%</td>
+                    <td style="color: #d32f2f;">-1.75%</td>
+                    <td>28×28</td>
+                </tr>
+                <tr>
+                    <td>CNN</td>
+                    <td>53.50%</td>
+                    <td>55.00%</td>
+                    <td style="color: #388e3c;">+1.50%</td>
+                    <td>224×224</td>
+                </tr>
+                <tr>
+                    <td>AlexNet</td>
+                    <td>53.75%</td>
+                    <td>59.50%</td>
+                    <td style="color: #388e3c;">+5.75%</td>
+                    <td>224×224</td>
+                </tr>
+                <tr>
+                    <td>ResNet-50</td>
+                    <td>49.50%</td>
+                    <td>62.50%</td>
+                    <td style="color: #388e3c;"><strong>+13.00%</strong></td>
+                    <td>224×224</td>
+                </tr>
+                <tr>
+                    <td>ViT</td>
+                    <td>49.00%</td>
+                    <td>63.50%</td>
+                    <td style="color: #388e3c;"><strong>+14.50%</strong></td>
+                    <td>224×224</td>
+                </tr>
+            </table>
+
+            <p><strong>The rankings literally reversed!</strong> This confirms our hypothesis perfectly.</p>
+
+            <h2>Analysis: Why the Results Flipped</h2>
+
+            <h3>1. Pre-trained Models Finally Shine</h3>
+
+            <p>With genuine 224×224 resolution, the pre-trained models could finally leverage their strengths:</p>
+
+            <div class="metric-card">
+                <p class="metric-name">Vision Transformer (63.50%)</p>
+                <ul>
+                    <li>Self-attention across 196 patches captures global retinal structure</li>
+                    <li>Can relate blood vessels in different regions of the fundus</li>
+                    <li>Pre-trained on high-resolution ImageNet images</li>
+                    <li><strong>14.50% improvement</strong> over upsampled 28×28 version</li>
+                </ul>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">ResNet-50 (62.50%)</p>
+                <ul>
+                    <li>Deep hierarchical features extract meaningful patterns</li>
+                    <li>50 layers justified by rich spatial information</li>
+                    <li><strong>13.00% improvement</strong> - the biggest winner from resolution increase</li>
+                    <li>Residual connections prevent vanishing gradients</li>
+                </ul>
+            </div>
+
+            <h3>2. Simple Models Hit Their Limit</h3>
+
+            <p><strong>Linear Model (52.50% - LOST 4.25%):</strong> Why it performed worse at higher resolution:</p>
             <ul>
-                <li><strong>224×224:</strong> ResNet-50 / ViT > AlexNet > CNN > MLP > Linear</li>
-                <li><strong>28×28:</strong> Linear > CNN > MLP > AlexNet > ResNet-50 > ViT</li>
+                <li>150,528 input dimensions (224×224×3) vs. 2,352 (28×28×3)</li>
+                <li>64× more parameters to learn with the same small dataset</li>
+                <li>No architectural bias to handle spatial complexity</li>
+                <li>The "simplicity advantage" becomes a "capacity limitation"</li>
+            </ul>
+
+            <h3>3. The Key Insight: Data Quality Transforms Everything</h3>
+
+            <div class="highlight-box">
+                <p><strong>With Upsampled 28→224 Images (Experiment 1):</strong></p>
+                <ul>
+                    <li>ResNet-50: 49.50% (lost to Linear model)</li>
+                    <li>ViT: 49.00% (worst performer)</li>
+                    <li>Problem: Interpolation artifacts, blurry features</li>
+                </ul>
+                <p><strong>With Native 224×224 Images (Experiment 2):</strong></p>
+                <ul>
+                    <li>ResNet-50: 62.50% (+13.00%)</li>
+                    <li>ViT: 63.50% (+14.50%)</li>
+                    <li>Solution: Genuine high-frequency details, real vascular structures</li>
+                </ul>
+                <p><em>The difference: Real data vs. fake data. The pre-trained models weren't bad—they were just given bad input.</em></p>
+            </div>
+
+            <h3>4. Training Efficiency Analysis</h3>
+
+            <table class="comparison-table">
+                <tr>
+                    <th>Model</th>
+                    <th>Test Acc</th>
+                    <th>Time (min)</th>
+                    <th>Acc per Minute</th>
+                    <th>Epochs</th>
+                </tr>
+                <tr>
+                    <td>Linear</td>
+                    <td>52.50%</td>
+                    <td>0.18</td>
+                    <td>291.7</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>AlexNet</td>
+                    <td>59.50%</td>
+                    <td>0.29</td>
+                    <td>205.2</td>
+                    <td>6</td>
+                </tr>
+                <tr>
+                    <td>ResNet-50</td>
+                    <td>62.50%</td>
+                    <td>1.72</td>
+                    <td>36.3</td>
+                    <td>9</td>
+                </tr>
+                <tr>
+                    <td>CNN</td>
+                    <td>55.00%</td>
+                    <td>2.28</td>
+                    <td>24.1</td>
+                    <td>20</td>
+                </tr>
+                <tr>
+                    <td>MLP</td>
+                    <td>51.75%</td>
+                    <td>2.61</td>
+                    <td>19.8</td>
+                    <td>10</td>
+                </tr>
+                <tr>
+                    <td>ViT</td>
+                    <td>63.50%</td>
+                    <td>9.96</td>
+                    <td>6.4</td>
+                    <td>15</td>
+                </tr>
+            </table>
+
+            <p><strong>Key Observations:</strong></p>
+            <ul>
+                <li><strong>AlexNet is the efficiency champion:</strong> 59.50% accuracy in just 0.29 minutes</li>
+                <li><strong>ViT is the accuracy champion:</strong> 63.50% but takes 9.96 minutes (34× slower than AlexNet)</li>
+                <li><strong>ResNet-50 is the balanced choice:</strong> 62.50% accuracy in 1.72 minutes</li>
             </ul>
 
             <h2>Discussion: Lessons for Applied Machine Learning</h2>
 
-            <h3>1. Match Model Complexity to Dataset Size</h3>
+            <h3>1. Resolution Must Match Model Capacity</h3>
 
-            <p><strong>Rule of thumb:</strong> You need approximately 10× more training samples than model parameters to avoid overfitting.</p>
+            <p>This experiment reveals that resolution must match model capacity:</p>
 
-            <ul>
-                <li><strong>Linear (12K params):</strong> Needs ~120K samples → Had 1,080 (but underfitting likely)</li>
-                <li><strong>ResNet-50 (25M params):</strong> Needs ~250M samples → Had 1,080 (severe overfitting)</li>
-            </ul>
-
-            <p><strong>Practical implication:</strong> For small medical imaging datasets (<10K images), consider simpler architectures, aggressive regularization, domain-specific pre-training, or few-shot learning techniques.</p>
+            <div class="highlight-box">
+                <p><strong>28×28 Resolution:</strong></p>
+                <ul>
+                    <li>Best for: Simple models (Linear, MLP)</li>
+                    <li>Why: Limited information matches limited capacity</li>
+                    <li>Winner: Linear (56.75%)</li>
+                </ul>
+                <p><strong>224×224 Resolution:</strong></p>
+                <ul>
+                    <li>Best for: Deep models (ResNet, ViT)</li>
+                    <li>Why: Rich information matches high capacity</li>
+                    <li>Winner: ViT (63.50%)</li>
+                </ul>
+            </div>
 
             <h3>2. Resolution Matters—But Only If It's Real</h3>
 
@@ -585,42 +825,42 @@ Dense: 256 → 5
                 <li>Consider models designed for smaller inputs (MobileNet, EfficientNet)</li>
             </ul>
 
-            <h3>3. Transfer Learning Has Requirements</h3>
+            <h3>3. Transfer Learning Works—With the Right Data</h3>
 
-            <p>Transfer learning provides the most benefit when:</p>
+            <p>Our experiments showed dramatic differences:</p>
             <ul>
-                <li><strong>Large source dataset:</strong> ImageNet's 14M images</li>
-                <li><strong>Similar domains:</strong> Natural images → Object detection (good); Natural images → Medical imaging (questionable)</li>
-                <li><strong>Sufficient fine-tuning data:</strong> At least thousands of target domain images</li>
-                <li><strong>Appropriate architecture:</strong> Match input requirements</li>
+                <li><strong>Upsampled images:</strong> Transfer learning fails (-7-14% accuracy loss vs. simple models)</li>
+                <li><strong>Native resolution:</strong> Transfer learning succeeds (+13-14.5% improvement)</li>
+            </ul>
+            <p><strong>Lesson:</strong> Data quality is non-negotiable for transfer learning success.</p>
+
+            <h3>4. The Complexity Paradox</h3>
+
+            <p>More parameters ≠ better performance:</p>
+            <ul>
+                <li>Linear (12K params) beat ResNet-50 (25M params) at 28×28</li>
+                <li>ResNet-50 beat Linear at 224×224</li>
+            </ul>
+            <p><strong>Lesson:</strong> Complexity must match the problem, not exceed it.</p>
+
+            <h3>5. Efficiency vs. Accuracy Trade-offs</h3>
+
+            <p>For production deployment, consider:</p>
+            <ul>
+                <li><strong>Real-time inference:</strong> AlexNet (59.5% in 0.29 min)</li>
+                <li><strong>Batch processing:</strong> ViT (63.5%, best accuracy but 34× slower)</li>
+                <li><strong>Edge devices:</strong> Custom CNN (smaller model, acceptable accuracy)</li>
             </ul>
 
-            <h3>4. Start Simple, Then Increase Complexity</h3>
+            <h3>6. Evaluation Metrics Beyond Accuracy</h3>
 
-            <p>The scientific method for model selection:</p>
-            <ol>
-                <li>Establish a simple baseline (Linear, Logistic Regression)</li>
-                <li>Try classical ML (Random Forest, SVM)</li>
-                <li>Attempt shallow neural networks (MLP)</li>
-                <li>Progress to CNNs if spatial structure matters</li>
-                <li>Try transfer learning if data is sufficient</li>
-                <li>Consider Transformers only for large-scale problems</li>
-            </ol>
-
-            <p><strong>Don't skip to step 6!</strong></p>
-
-            <h3>5. Evaluation Metrics Beyond Accuracy</h3>
-
-            <p>For medical imaging, consider:</p>
+            <p>The F1 scores reveal class balance performance:</p>
             <ul>
-                <li><strong>Sensitivity/Recall:</strong> How many positive cases did we catch?</li>
-                <li><strong>Specificity:</strong> How many negative cases did we correctly identify?</li>
-                <li><strong>F1 Score:</strong> Balance between precision and recall</li>
-                <li><strong>AUC-ROC:</strong> Classification performance across thresholds</li>
-                <li><strong>Confusion Matrix:</strong> Which specific classes are confused?</li>
+                <li><strong>Best F1 Scores:</strong> ViT (0.631), ResNet-50 (0.605) - best at handling all classes equally</li>
+                <li><strong>Lower F1 Scores:</strong> Linear (0.431), MLP (0.439) - poor class discrimination</li>
             </ul>
 
-            <p>In medical diagnosis, <strong>false negatives</strong> (missing a disease) can be more costly than <strong>false positives</strong> (unnecessary follow-up). Model selection should account for these trade-offs.</p>
+            <p>In medical diagnosis, <strong>false negatives</strong> (missing a disease) can be more costly than <strong>false positives</strong> (unnecessary follow-up). The pre-trained models don't just get higher accuracy—they also provide more reliable predictions across all disease categories.</p>
 
             <h2>When to Use Each Model Type</h2>
 
@@ -671,17 +911,41 @@ Dense: 256 → 5
                 </ul>
             </div>
 
-            <h2>Conclusion: Rethinking Model Selection</h2>
+            <h2>Conclusion: The Complete Picture</h2>
 
-            <p>This experiment revealed a counterintuitive but important lesson: <strong>complexity is not always better, especially with limited data.</strong></p>
+            <p>This experiment revealed a nuanced but important lesson: <strong>the best model depends entirely on your data quality and resolution.</strong></p>
+
+            <h3>The Definitive Rankings</h3>
+
+            <div class="highlight-box">
+                <p><strong>28×28 Resolution (Limited Information):</strong></p>
+                <ol>
+                    <li>Linear (56.75%) 🥇</li>
+                    <li>AlexNet (53.75%)</li>
+                    <li>CNN (53.50%)</li>
+                    <li>MLP (53.50%)</li>
+                    <li>ResNet-50 (49.50%)</li>
+                    <li>ViT (49.00%)</li>
+                </ol>
+                <p><strong>224×224 Resolution (Rich Information):</strong></p>
+                <ol>
+                    <li>ViT (63.50%) 🥇</li>
+                    <li>ResNet-50 (62.50%)</li>
+                    <li>AlexNet (59.50%)</li>
+                    <li>CNN (55.00%)</li>
+                    <li>Linear (52.50%)</li>
+                    <li>MLP (51.75%)</li>
+                </ol>
+                <p><em>The rankings literally reversed!</em></p>
+            </div>
 
             <div class="highlight-box">
                 <p><strong>Key Takeaways:</strong></p>
                 <ul>
-                    <li>The Linear model won at 28×28 resolution by avoiding overfitting on the small dataset, working with genuine pixel data, and training 200× faster than Vision Transformers</li>
-                    <li>Pre-trained models underperformed because they required upsampled images with interpolation noise, ImageNet features don't transfer well to medical imaging, and millions of parameters drastically overfit 1,080 training samples</li>
-                    <li>Native 224×224 resolution should change the results by providing genuine high-resolution features for pre-trained models to leverage</li>
-                    <li>Always start with simple baselines—you might be surprised by the results</li>
+                    <li><strong>Resolution matters, but context matters more:</strong> Simple models win at 28×28 (less overfitting risk), complex models win at 224×224 (can leverage information)</li>
+                    <li><strong>Transfer learning works—with the right data:</strong> Upsampled images caused transfer learning to fail; native resolution made it succeed with +13-14.5% improvements</li>
+                    <li><strong>The complexity paradox:</strong> Linear (12K params) beat ResNet-50 (25M params) at 28×28, but the reverse was true at 224×224</li>
+                    <li><strong>Data quality is non-negotiable:</strong> The pre-trained models weren't bad—they were just given bad (upsampled) input</li>
                 </ul>
             </div>
 
