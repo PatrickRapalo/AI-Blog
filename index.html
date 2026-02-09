@@ -28,25 +28,59 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
+    <!-- Hero Section - Featured Post -->
     <section class="hero">
         <div class="container">
-            <h1>Welcome to My AI Learning Journey</h1>
-            <p class="subtitle">Documenting my path through Data Science, Machine Learning, and AI</p>
+            <div class="featured-post">
+                <div class="featured-content">
+                    <h1>Welcome to My AI Learning Journey</h1>
+                    <p>Documenting my path through Data Science, Machine Learning, and AI. Explore my latest posts, projects, and insights as I dive deep into the world of artificial intelligence and data analytics.</p>
+                    <a href="#posts" class="featured-btn">
+                        Explore Posts <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                <div class="featured-image">
+                    <svg width="300" height="300" viewBox="0 0 300 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <circle cx="150" cy="150" r="120" fill="rgba(255,255,255,0.1)"/>
+                        <rect x="100" y="100" width="100" height="100" rx="10" fill="rgba(255,140,66,0.3)"/>
+                        <circle cx="180" cy="120" r="30" fill="rgba(255,255,255,0.2)"/>
+                        <path d="M120 140 L160 140 L140 170 Z" fill="rgba(255,140,66,0.5)"/>
+                    </svg>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Posts Section -->
+    <section id="posts" class="posts">
+        <div class="container">
+            <h2>Posts</h2>
+            <div class="category-filters">
+                <button class="filter-pill active" data-category="all">All</button>
+                <button class="filter-pill" data-category="data-science">Data Science</button>
+                <button class="filter-pill" data-category="machine-learning">Machine Learning</button>
+                <button class="filter-pill" data-category="agents">Multi-Agent Systems</button>
+                <button class="filter-pill" data-category="computer-vision">Computer Vision</button>
+                <button class="filter-pill" data-category="tutorial">Tutorial</button>
+            </div>
+            <div class="posts-grid" id="postsGrid">
+                <!-- Posts will be dynamically loaded here -->
+            </div>
         </div>
     </section>
 
     <!-- About Section -->
     <section id="about" class="about">
         <div class="container">
-            <h2>About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>Hi! I'm Patrick, a third-year Data Analytics major at Florida Atlantic University with aspirations to become a data scientist. I'm passionate about the intersection of technology, data, and real-world problem-solving.</p>
-                </div>
+            <div class="about-container">
+                <h2>About Me</h2>
+                <div class="about-content">
+                    <div class="about-text">
+                        <p>Hi! I'm Patrick, a third-year Data Analytics major at Florida Atlantic University with aspirations to become a data scientist. I'm passionate about the intersection of technology, data, and real-world problem-solving.</p>
+                    </div>
 
                 <div class="skills-grid">
-                    <div class="skill-card">
+                    <div class="skill-section">
                         <h3>What I'm Learning</h3>
                         <ul>
                             <li>Machine Learning & Deep Learning (PyTorch, TensorFlow)</li>
@@ -56,16 +90,16 @@
                         </ul>
                     </div>
 
-                    <div class="skill-card">
+                    <div class="skill-section">
                         <h3>Experience</h3>
-                        <p>I Have worked on multiple Data Analytics and AI projects:</p>
+                        <p>I have worked on multiple Data Analytics and AI projects:</p>
                         <ul>
                             <li>Traffic Analysis of Broward and Miami-Dade County</li>
                             <li>Visual AI Models using AlexNet and Resnet</li>
                         </ul>
                     </div>
 
-                    <div class="skill-card">
+                    <div class="skill-section">
                         <h3>Technical Skills</h3>
                         <p><strong>Languages:</strong> Python, SQL, R</p>
                         <p><strong>ML/DL:</strong> PyTorch, TensorFlow, Scikit-learn</p>
@@ -73,7 +107,7 @@
                         <p><strong>Other:</strong> Git, Jupyter, Flask, React</p>
                     </div>
 
-                    <div class="skill-card">
+                    <div class="skill-section">
                         <h3>Current Focus</h3>
                         <ul>
                             <li>Agent-Based Modeling for simulating complex systems</li>
@@ -95,15 +129,6 @@
                 </div>
             </div>
         </div>
-    </section>
-
-    <!-- Posts Section -->
-    <section id="posts" class="posts">
-        <div class="container">
-            <h2>Recent Posts</h2>
-            <div class="posts-grid" id="postsGrid">
-                <!-- Posts will be dynamically loaded here -->
-            </div>
         </div>
     </section>
 
