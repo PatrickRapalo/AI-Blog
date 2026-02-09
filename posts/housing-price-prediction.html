@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Housing Price Prediction - Patrick's AI Journey</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .post-body {
+            line-height: 1.8;
+        }
+
+        .post-body h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .post-body h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .post-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-body ul, .post-body ol {
+            margin-bottom: 1.2rem;
+            margin-left: 2rem;
+        }
+
+        .post-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-body code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .post-body pre {
+            background-color: #2d2d2d;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-body pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #f8f8f2;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .metric-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .metric-card .metric-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .metric-card .metric-value {
+            font-family: 'Courier New', monospace;
+            background-color: #e8e8e8;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Patrick's AI Journey</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#posts">Posts</a></li>
+                <li><a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+
+        <header class="post-header">
+            <h1 class="post-title">Kaggle Housing Price Prediction with Linear Regression</h1>
+            <p class="post-meta">
+                <i class="far fa-calendar"></i> February 9, 2026 |
+                <i class="far fa-clock"></i> 6 min read
+            </p>
+        </header>
+
+        <div class="post-body">
+
+            <p>I wanted to work on a Kaggle dataset/competition. I have worked on and used logistic regression for the Titanic dataset, so I wanted to try my hand at another predictive problem: the House Prices competition. The main goal here was to use the 79 attributes provided to predict the sale price of a house. Since this is a regression problem (predicting a continuous value rather than a category), I used linear regression and wanted to see how accurate it could be.</p>
+
+            <h2>Data Cleaning</h2>
+
+            <p>First, I cleaned the data by removing columns with a large number of null values, and then imputing the remaining columns with the mean (for numeric columns) and mode (for categorical columns). I then used a one-hot encoder to convert categorical variables into a binary format.</p>
+
+            <h3>One-Hot Encoding</h3>
+
+            <p>Here is the code for the encoder:</p>
+
+            <pre><code class="language-python"># Create and fit encoder on training data
+encoder = OneHotEncoder(sparse_output=False, drop='first', handle_unknown='ignore')
+encoder.fit(X_train_filled[object_cols])
+
+# Transform both train and test
+train_encoded = encoder.transform(X_train_filled[object_cols])
+test_encoded = encoder.transform(X_test_filled[object_cols])
+
+# Convert to DataFrames
+train_encoded_df = pd.DataFrame(
+    train_encoded,
+    columns=encoder.get_feature_names_out(object_cols),
+    index=X_train_filled.index
+)
+
+test_encoded_df = pd.DataFrame(
+    test_encoded,
+    columns=encoder.get_feature_names_out(object_cols),
+    index=X_test_filled.index
+)
+
+# Combine with numeric columns
+X_train_encoded = pd.concat([X_train_filled[numeric_cols], train_encoded_df], axis=1)
+X_test_encoded = pd.concat([X_test_filled[numeric_cols], test_encoded_df], axis=1)
+
+print(f"Train shape: {X_train_encoded.shape}")
+print(f"Test shape: {X_test_encoded.shape}")</code></pre>
+
+            <p>This was built with the <strong>scikit-learn</strong> library in Python, which provides a wide range of simple and efficient tools for data analysis and predictive modeling, built upon the Python scientific computing stack (NumPy, SciPy, and Matplotlib).</p>
+
+            <h2>Training the Model</h2>
+
+            <p>I used the linear regression model built into scikit-learn. Here is the code for that:</p>
+
+            <pre><code class="language-python">model = LinearRegression()
+model.fit(X_train_encoded, y_train)
+
+# Make predictions on training set
+y_train_pred = model.predict(X_train_encoded)
+
+# Evaluate on training data
+print("Training R² Score:", r2_score(y_train, y_train_pred))
+print("Training RMSE:", np.sqrt(mean_squared_error(y_train, y_train_pred)))
+print("Training MAE:", mean_absolute_error(y_train, y_train_pred))
+
+# Make predictions on test set
+y_test_pred = model.predict(X_test_encoded)</code></pre>
+
+            <h2>Results</h2>
+
+            <p>After data preprocessing and training the model, here were my training scores:</p>
+
+            <pre><code>Training R² Score: 0.9301102689204063
+Training RMSE: 20994.755492882352
+Training MAE: 13511.797268099297</code></pre>
+
+            <div class="metric-card">
+                <p class="metric-name">R² Score &mdash; 0.93</p>
+                <p>The R² score describes how much of the variance in the target variable is captured by our model. A score of 0.93 means the model explains about 93% of the variance in housing prices using the features in this dataset.</p>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">RMSE (Root Mean Squared Error) &mdash; $20,995</p>
+                <p>The RMSE is the square root of the average squared prediction error. Because it squares the errors before averaging, it is more sensitive to large errors and can be heavily affected by outliers.</p>
+            </div>
+
+            <div class="metric-card">
+                <p class="metric-name">MAE (Mean Absolute Error) &mdash; $13,512</p>
+                <p>The MAE is the average of the absolute prediction errors. It gives a more typical sense of the average error. This means the model's predictions are typically about $13,500 above or below the actual price.</p>
+            </div>
+
+            <h2>Conclusion</h2>
+
+            <p>This is an okay first attempt at learning and utilizing linear regression to make a prediction. Some ways I have been reading up on to improve my model include:</p>
+
+            <ul>
+                <li><strong>Different models:</strong> Random Forest or Gradient Boosting (XGBoost, LightGBM)</li>
+                <li><strong>Feature engineering:</strong> Reducing dimensionality while also creating more meaningful variables</li>
+                <li><strong>Handle outliers:</strong> Identifying and addressing extreme values that skew the model</li>
+                <li><strong>Feature selection:</strong> Picking the most informative features</li>
+                <li><strong>Better missing value handling:</strong> More sophisticated imputation strategies</li>
+                <li><strong>Cross-validation:</strong> More robust evaluation of model performance</li>
+                <li><strong>Scaling/Normalization:</strong> Standardizing feature ranges</li>
+                <li><strong>Ensemble methods:</strong> Combining multiple models for better predictions</li>
+                <li><strong>Target transformation:</strong> Applying log transforms to the target variable</li>
+            </ul>
+
+            <p>I will start with feature engineering and will cover that in a new blog post because I'm sure there is a lot to learn there.</p>
+
+            <hr style="margin: 3rem 0;">
+
+            <p><strong>Questions or suggestions?</strong> Feel free to reach out via GitHub or connect with me on LinkedIn.</p>
+        </div>
+
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Patrick's AI Journey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>

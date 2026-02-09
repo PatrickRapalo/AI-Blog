@@ -1,6 +1,15 @@
 // Blog posts data
 const posts = [
     {
+        title: "Kaggle Housing Price Prediction with Linear Regression",
+        date: "February 9, 2026",
+        excerpt: "Using linear regression to predict house prices in the Kaggle House Prices competition, covering data cleaning, one-hot encoding, and model evaluation.",
+        tags: ["Machine Learning", "Regression", "Kaggle", "Python"],
+        category: "machine-learning",
+        link: "posts/housing-price-prediction.html",
+        image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop"
+    },
+    {
         title: "MedMNIST Visual AI Model Comparison: When Simplicity Beats Complexity",
         date: "February 3, 2025",
         excerpt: "Exploring whether complex models always perform better by comparing six computer vision architectures on medical imaging data.",
