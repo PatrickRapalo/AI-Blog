@@ -58,7 +58,7 @@ function createPostCard(post) {
                     <h3>${post.title}</h3>
                 </div>
                 <div class="post-author">
-                    <img src="assets/photos/mia.jpg" alt="Patrick" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22%3E%3Ccircle fill=%22%232d5f5d%22 cx=%2212%22 cy=%2212%22 r=%2212%22/%3E%3C/svg%3E'">
+                    <img src="assets/photos/IMG_7740.jpg alt="Patrick" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%2224%22 height=%2224%22%3E%3Ccircle fill=%22%232d5f5d%22 cx=%2212%22 cy=%2212%22 r=%2212%22/%3E%3C/svg%3E'">
                     <span class="post-author-name">Patrick</span>
                 </div>
             </div>
