@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Building an E-Sports Stats Dashboard - Patrick's AI Journey</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .post-body {
+            line-height: 1.8;
+        }
+
+        .post-body h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .post-body h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .post-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-body ul, .post-body ol {
+            margin-bottom: 1.2rem;
+            margin-left: 2rem;
+        }
+
+        .post-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-body code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .post-body pre {
+            background-color: #2d2d2d;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-body pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #f8f8f2;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .metric-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .metric-card .metric-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .db-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .db-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+
+        .db-table td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid #e0e0e0;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+        }
+
+        .db-table tr:nth-child(even) td {
+            background-color: #f5f5f5;
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-tag {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Patrick's AI Journey</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#posts">Posts</a></li>
+                <li><a href="https://github.com/PatrickRapalo" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+
+        <header class="post-header">
+            <h1 class="post-title">Building an E-Sports Stats Dashboard</h1>
+            <p class="post-meta">
+                <i class="far fa-calendar"></i> March 2026 |
+                <i class="far fa-clock"></i> 5 min read
+            </p>
+        </header>
+
+        <div class="post-body">
+
+            <p>After finishing up a Slay the Spire 2 run tracker in Supabase, I wanted to do something bigger with the same stack. I had been using Tracker.gg a lot and kept thinking about how they present game stats — dense, dark, everything you need at a glance without feeling cluttered. I wanted to try building something like that myself.</p>
+
+            <p>So I built a full e-sports stats dashboard covering three games: Fortnite, Valorant, and CS:GO. Each game has its own page with game-specific stats, a shared home dashboard that aggregates everything, and Recharts visualizations for performance trends over time.</p>
+
+            <div class="highlight-box">
+                <strong>Tech stack:</strong> React &middot; Tailwind CSS &middot; FastAPI &middot; Supabase &middot; Recharts &middot; Python
+            </div>
+
+            <h2>What's In It</h2>
+
+            <p>The home dashboard gives you a cross-game overview — KD ratio, win rate, average kills — and highlights your best performance across all three games with a highlight card at the top. From there you can drill into each game's individual page.</p>
+
+            <p>Each game page shows stats specific to that title. Valorant tracks agent, headshot percentage, and round win rate. Fortnite tracks placement, game mode, and elimination count. CS:GO tracks map, flash assists, and bomb plants. I wanted the per-game pages to feel native to each game rather than just slapping the same template on all three.</p>
+
+            <p>Every page also has a match history table with filtering, so you can look back at individual sessions. And there are two chart types: a line chart for performance over time and a bar chart breaking down kills per game. Dark theme throughout, intentionally data-dense.</p>
+
+            <h2>Database Design</h2>
+
+            <p>I used separate Supabase tables for each game's match history rather than trying to squeeze everything into one generic table. Each table has game-specific columns alongside shared ones like <code>player_id</code>, <code>match_date</code>, and <code>kills</code>.</p>
+
+            <table class="db-table">
+                <thead>
+                    <tr>
+                        <th>Table</th>
+                        <th>Game-specific columns</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>fortnite_matches</td>
+                        <td>placement, game_mode, eliminations</td>
+                    </tr>
+                    <tr>
+                        <td>valorant_matches</td>
+                        <td>agent, headshot_percent, round_wins</td>
+                    </tr>
+                    <tr>
+                        <td>csgo_matches</td>
+                        <td>map, flash_assists, bomb_plants</td>
+                    </tr>
+                    <tr>
+                        <td>players</td>
+                        <td>username, region, linked game accounts</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <p>Keeping the tables separate made the schema cleaner and made it easier to write game-specific queries without a bunch of null columns everywhere. The tradeoff is that the cross-game aggregation queries on the home dashboard are a bit more involved — you have to union the results — but it was worth it.</p>
+
+            <h2>The Backend</h2>
+
+            <p>I used FastAPI for the backend, connected to Supabase via <code>supabase-py</code> with credentials in a <code>.env</code> file. The API exposes three main types of endpoints:</p>
+
+            <ul>
+                <li><strong>Match history per game</strong> — paginated, with optional filters for date range and game mode</li>
+                <li><strong>Aggregated stats</strong> — KD ratio, win rate, average kills, computed server-side</li>
+                <li><strong>Dashboard summary</strong> — a single endpoint that returns the cross-game overview the home page needs</li>
+            </ul>
+
+            <p>FastAPI was genuinely pleasant to work with. The automatic docs at <code>/docs</code> made testing endpoints fast, and the type hints kept things clean. I also already had Supabase set up from the STS2 tracker project, so reusing it as the backend for this made a lot of sense — same project, same credentials, just new tables.</p>
+
+            <pre><code class="language-python">@app.get("/stats/summary")
+async def get_dashboard_summary(player_id: str):
+    fortnite = supabase.table("fortnite_matches") \
+        .select("kills, placement") \
+        .eq("player_id", player_id).execute()
+    valorant = supabase.table("valorant_matches") \
+        .select("kills, headshot_percent") \
+        .eq("player_id", player_id).execute()
+    csgo = supabase.table("csgo_matches") \
+        .select("kills, flash_assists") \
+        .eq("player_id", player_id).execute()
+
+    return aggregate_summary(fortnite.data, valorant.data, csgo.data)</code></pre>
+
+            <h2>What I Took Away</h2>
+
+            <p>This was my first time putting React, FastAPI, and Supabase together in one project. Each piece I had used before in isolation, but wiring them together as a full stack taught me a lot about how data flows through the layers — from the database, through the API, into state on the frontend, and out into charts.</p>
+
+            <p>FastAPI was the standout for me. Coming from Flask, the automatic validation and the interactive docs felt like a big quality-of-life upgrade. I'll definitely reach for it again.</p>
+
+            <p>The obvious next step is swapping the seeded test data for real API data from the game publishers. Riot has a public API for Valorant stats, and there are community APIs for Fortnite. Getting live data in there would make this actually useful rather than just a working demo. That's the next version.</p>
+
+            <div class="tech-stack">
+                <span class="tech-tag">React</span>
+                <span class="tech-tag">Tailwind CSS</span>
+                <span class="tech-tag">FastAPI</span>
+                <span class="tech-tag">Supabase</span>
+                <span class="tech-tag">Recharts</span>
+                <span class="tech-tag">Python</span>
+            </div>
+
+            <hr style="margin: 3rem 0;">
+
+            <p><strong>Questions or suggestions?</strong> Feel free to reach out via GitHub or connect with me on LinkedIn.</p>
+        </div>
+
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Patrick's AI Journey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>

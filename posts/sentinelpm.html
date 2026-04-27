@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>I Built an Agentic AI Project Manager for a Hackathon - Patrick's AI Journey</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .post-body {
+            line-height: 1.8;
+        }
+
+        .post-body h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .post-body h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .post-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-body ul, .post-body ol {
+            margin-bottom: 1.2rem;
+            margin-left: 2rem;
+        }
+
+        .post-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-body code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .post-body pre {
+            background-color: #2d2d2d;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-body pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #f8f8f2;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .pipeline-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .pipeline-card h3 {
+            margin-top: 0;
+            color: var(--primary-color);
+        }
+
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+        }
+
+        .tech-tag {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Patrick's AI Journey</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#posts">Posts</a></li>
+                <li><a href="https://github.com/PatrickRapalo" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+
+        <header class="post-header">
+            <h1 class="post-title">I Built an Agentic AI Project Manager for a Hackathon</h1>
+            <p class="post-meta">
+                <i class="far fa-calendar"></i> April 2026 |
+                <i class="far fa-clock"></i> 7 min read
+            </p>
+        </header>
+
+        <div class="post-body">
+
+            <p>A few weeks ago my team entered an Agentic AI Hackathon and we built SentinelPM — an autonomous project management system. The pitch was simple: project managers spend a huge chunk of their time on repetitive, mechanical tasks like chasing overdue tickets, updating risk registers, and sending the same status emails to clients over and over. What if an AI agent just handled all of that on its own?</p>
+
+            <p>We weren't trying to replace PMs. The goal was to get the tedious stuff off their plate so they could spend their time on the decisions that actually need a human — prioritization calls, client relationships, things that require judgment. That framing ended up shaping everything about how we designed the system.</p>
+
+            <div class="highlight-box">
+                <strong>Tech stack:</strong> n8n &middot; Google Gemini &middot; Jira Cloud &middot; Google Sheets &middot; Gmail API &middot; Atlassian REST API
+            </div>
+
+            <h2>How It Works: Two Pipelines</h2>
+
+            <p>We structured SentinelPM as two separate agentic pipelines, each with its own trigger and purpose. They share the same Jira and Gemini integrations but operate independently.</p>
+
+            <div class="pipeline-card">
+                <h3>Pipeline 1 &mdash; Risk &amp; Prioritization Agent</h3>
+                <p>This one runs on a schedule. Every morning it wakes up, pulls live ticket data from Jira via the Atlassian REST API, and feeds that data into Google Gemini to identify risks — things like tickets that are overdue, blocked, or assigned to someone who already has a full plate.</p>
+                <p>Gemini's findings get appended to a Google Sheets risk register so there's always a running log. Then the agent composes a risk summary email and sends it directly to the PM. And here's the part I thought was the coolest: it automatically reassigns overdue tickets in Jira, pulling from a workload calculation to find whoever on the team has the most available capacity.</p>
+                <p>So by the time the PM opens their laptop in the morning, the risk register is already updated, their inbox has a summary, and the overdue tickets have already been redistributed.</p>
+            </div>
+
+            <div class="pipeline-card">
+                <h3>Pipeline 2 &mdash; Client Communication Agent</h3>
+                <p>This pipeline is event-driven rather than scheduled. It watches the PM's Gmail inbox, and when a client email comes in asking for a project update, it kicks off automatically.</p>
+                <p>The agent pulls current Jira ticket data, sends it to Gemini with the client's email as context, and Gemini drafts a response tailored to what the client actually asked. The agent then sends that reply automatically. The PM doesn't have to touch it unless they want to.</p>
+                <p>We also added PDF handling — if a client sends a report or brief as an attachment, the agent reads it, extracts the key insights, and surfaces a clean summary to the PM rather than making them dig through the whole document.</p>
+            </div>
+
+            <h2>What Broke (And How We Fixed It)</h2>
+
+            <p>Honestly, debugging this was where I learned the most. A few specific things that cost us a lot of time:</p>
+
+            <p><strong>The n8n Jira node was built on a deprecated Atlassian endpoint.</strong> We kept getting authentication failures that made no sense until we realized the built-in node wasn't hitting the right API. We had to ditch it and swap to raw HTTP request nodes pointing directly at the new JQL search endpoint. Not fun to figure out mid-hackathon.</p>
+
+            <p><strong>Jira's reassignment API does not accept display names or plain-text priority labels.</strong> It wants Account ID UUIDs for users and numeric IDs for priority levels — so "High" needs to be <code>2</code>, and "Patrick Rapalo" needs to be a UUID like <code>5b10a2844c20165700ede21g</code>. We spent a long time debugging 400 errors before realizing the API was rejecting our payloads for this reason. Once we figured it out and mapped the IDs correctly, the reassignment worked perfectly.</p>
+
+            <p><strong>Gemini's output path in n8n is <code>$json.output</code>, not <code>$json.text</code>.</strong> That one sounds small but it broke our entire response pipeline until we caught it.</p>
+
+            <h2>What I Took Away From This</h2>
+
+            <p>This was the first time I built something that I would genuinely call agentic. Not a chatbot, not a model that answers questions — something that wakes up on its own, takes actions in real systems, and creates side effects in the world. Emails get sent. Tickets get reassigned. Spreadsheets get updated. All without a human clicking anything.</p>
+
+            <p>That shift from query/response to trigger/action/side-effect feels like a fundamentally different mode of building with AI. There's a lot more to think about — error handling, when the agent should pause and ask for confirmation, how to make its reasoning visible to the PM rather than a black box. We touched on some of this but there's a lot more to explore.</p>
+
+            <p>I want to keep building in this space. The idea of agents that run in the background and handle the operational overhead of knowledge work is something I think is genuinely useful, not just a demo.</p>
+
+            <div class="tech-stack">
+                <span class="tech-tag">n8n</span>
+                <span class="tech-tag">Google Gemini</span>
+                <span class="tech-tag">Jira Cloud</span>
+                <span class="tech-tag">Google Sheets</span>
+                <span class="tech-tag">Gmail API</span>
+                <span class="tech-tag">Atlassian REST API</span>
+            </div>
+
+            <hr style="margin: 3rem 0;">
+
+            <p><strong>Questions or suggestions?</strong> Feel free to reach out via GitHub or connect with me on LinkedIn.</p>
+        </div>
+
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Patrick's AI Journey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+</body>
+</html>

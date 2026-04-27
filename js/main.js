@@ -1,6 +1,24 @@
 // Blog posts data
 const posts = [
     {
+        title: "I Built an Agentic AI Project Manager for a Hackathon",
+        date: "April 2026",
+        excerpt: "My team built SentinelPM at an Agentic AI Hackathon — an autonomous system that pulls Jira data, identifies risks via Gemini, reassigns overdue tickets, and handles client emails automatically.",
+        tags: ["Agentic AI", "n8n", "Google Gemini", "Jira", "Automation"],
+        category: "agents",
+        link: "posts/sentinelpm.html",
+        image: "https://images.unsplash.com/photo-1531403009284-440f080d1e12?w=400&h=300&fit=crop"
+    },
+    {
+        title: "Building an E-Sports Stats Dashboard",
+        date: "March 2026",
+        excerpt: "A full-stack stats dashboard for Fortnite, Valorant, and CS:GO built with React, FastAPI, and Supabase — inspired by the data-dense layout of Tracker.gg.",
+        tags: ["Web Dev", "React", "FastAPI", "Supabase", "Python"],
+        category: "data-science",
+        link: "posts/esports-dashboard.html",
+        image: "https://images.unsplash.com/photo-1542751371-adc38448a05e?w=400&h=300&fit=crop"
+    },
+    {
         title: "Building an AI Day Trading Assistant for NASDAQ Analysis",
         date: "April 27, 2026",
         excerpt: "How I built a web-based AI trading tool using JavaScript, Yahoo Finance API, and technical indicators like RSI, MACD, and Bollinger Bands to generate real-time NASDAQ price predictions.",
