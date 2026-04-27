@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Day Trading Assistant - Patrick's AI Journey</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .post-body {
+            line-height: 1.8;
+        }
+
+        .post-body h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .post-body h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .post-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-body ul, .post-body ol {
+            margin-bottom: 1.2rem;
+            margin-left: 2rem;
+        }
+
+        .post-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-body code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .post-body pre {
+            background-color: #2d2d2d;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-body pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #f8f8f2;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .metric-card {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1.2rem;
+            margin-bottom: 1.2rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .metric-card .metric-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            font-size: 1.1rem;
+        }
+
+        .metric-card .metric-value {
+            font-family: 'Courier New', monospace;
+            background-color: #e8e8e8;
+            padding: 0.3rem 0.6rem;
+            border-radius: 3px;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+
+        .indicator-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .indicator-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+
+        .indicator-table td {
+            padding: 0.7rem 1rem;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .indicator-table tr:nth-child(even) td {
+            background-color: #f5f5f5;
+        }
+
+        .score-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .score-item {
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            padding: 1rem;
+            border-left: 4px solid var(--accent-color);
+        }
+
+        .score-item.bullish { border-left-color: #27ae60; }
+        .score-item.bearish { border-left-color: #e74c3c; }
+        .score-item.neutral { border-left-color: #95a5a6; }
+
+        .score-label {
+            font-weight: bold;
+            font-size: 0.9rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .score-desc {
+            font-size: 0.85rem;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+            .score-grid { grid-template-columns: 1fr; }
+            .indicator-table { font-size: 0.85rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Patrick's AI Journey</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#posts">Posts</a></li>
+                <li><a href="https://github.com/PatrickRapalo" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+
+        <header class="post-header">
+            <h1 class="post-title">Building an AI Day Trading Assistant for NASDAQ Analysis</h1>
+            <p class="post-meta">
+                <i class="far fa-calendar"></i> April 27, 2026 |
+                <i class="far fa-clock"></i> 8 min read
+            </p>
+        </header>
+
+        <div class="post-body">
+
+            <p>I have been interested in financial markets for a while, and I wanted to combine that interest with what I have been learning in data analytics. The result is a web-based AI Day Trading Assistant that pulls real-time NASDAQ data, computes technical indicators, and generates directional price predictions with confidence scores. This post walks through how I built it and the logic behind each component.</p>
+
+            <div class="highlight-box">
+                <strong>Important disclaimer:</strong> This tool was built entirely for educational purposes to explore technical analysis and data-driven decision systems. It is not financial advice. Day trading carries significant risk &mdash; studies show the majority of day traders lose money.
+            </div>
+
+            <h2>Architecture: Keeping It Simple</h2>
+
+            <p>One of my goals was to build something that required no backend server. Everything runs client-side in the browser using vanilla JavaScript, which made deployment to GitHub Pages trivial. The data comes from the Yahoo Finance API via CORS proxy fallbacks, and charts are rendered using Chart.js alongside TradingView's Lightweight Charts library.</p>
+
+            <table class="indicator-table">
+                <thead>
+                    <tr>
+                        <th>Layer</th>
+                        <th>Technology</th>
+                        <th>Purpose</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Frontend UI</td><td>HTML5 / CSS3</td><td>Responsive interface</td></tr>
+                    <tr><td>Logic</td><td>Vanilla JavaScript</td><td>Core application logic</td></tr>
+                    <tr><td>Charts</td><td>Chart.js + Lightweight Charts</td><td>Data visualization</td></tr>
+                    <tr><td>Data Source</td><td>Yahoo Finance API</td><td>Real-time market data</td></tr>
+                    <tr><td>CORS Handling</td><td>Multiple proxy fallbacks</td><td>API access from browser</td></tr>
+                    <tr><td>Deployment</td><td>GitHub Pages</td><td>Free static hosting</td></tr>
+                </tbody>
+            </table>
+
+            <p>Fetching data from the Yahoo Finance API from a browser environment requires routing requests through a CORS proxy. I implemented a fallback chain so the app tries multiple proxies before giving up:</p>
+
+            <pre><code class="language-javascript">async function fetchStockData(ticker, range, interval) {
+    const proxies = [
+        'https://api.allorigins.win/raw?url=',
+        'https://corsproxy.io/?'
+    ];
+    const yahooUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${ticker}?interval=${interval}&range=${range}`;
+
+    for (let proxy of proxies) {
+        const response = await fetch(proxy + encodeURIComponent(yahooUrl));
+        const data = await response.json();
+        return formatData(data);
+    }
+}</code></pre>
+
+            <p>The app supports 30+ NASDAQ stocks plus NQ=F futures, across six timeframes from 2-minute candlesticks up to daily charts, making it useful for both day trading and swing trading analysis.</p>
+
+            <h2>The AI Rules Engine</h2>
+
+            <p>The "AI" here is a weighted scoring system that evaluates six technical indicators simultaneously. Each indicator votes bullish or bearish with a weight attached, and the total score determines the final directional prediction. I find this approach interesting because it mirrors how a human trader might mentally weigh different signals before making a decision.</p>
+
+            <table class="indicator-table">
+                <thead>
+                    <tr>
+                        <th>Indicator</th>
+                        <th>Weight</th>
+                        <th>Bullish Signal</th>
+                        <th>Bearish Signal</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>Moving Averages</td><td>2.0</td><td>Price &gt; SMA20 &gt; SMA50</td><td>Price &lt; SMA20 &lt; SMA50</td></tr>
+                    <tr><td>RSI</td><td>1.5</td><td>RSI &lt; 30 (oversold)</td><td>RSI &gt; 70 (overbought)</td></tr>
+                    <tr><td>MACD</td><td>1.5</td><td>MACD &gt; Signal + positive histogram</td><td>MACD &lt; Signal + negative histogram</td></tr>
+                    <tr><td>Bollinger Bands</td><td>1.0</td><td>Price near lower band</td><td>Price near upper band</td></tr>
+                    <tr><td>Volume</td><td>0.5</td><td>High volume confirms uptrend</td><td>High volume confirms downtrend</td></tr>
+                    <tr><td>Momentum</td><td>1.0</td><td>5-period momentum &gt; 2%</td><td>5-period momentum &lt; -2%</td></tr>
+                </tbody>
+            </table>
+
+            <p>Moving averages carry the highest weight (2.0) because trend alignment across the 20-SMA and 50-SMA is generally the strongest signal. Volume gets the lowest weight (0.5) because high volume alone is ambiguous without directional context from other indicators.</p>
+
+            <p>The total score maps to a prediction category:</p>
+
+            <div class="score-grid">
+                <div class="score-item bullish">
+                    <div class="score-label">Score &ge; 3 &rarr; BULLISH</div>
+                    <div class="score-desc">Confidence: 60&ndash;95%</div>
+                </div>
+                <div class="score-item bullish">
+                    <div class="score-label">Score 0 to 3 &rarr; SLIGHTLY BULLISH</div>
+                    <div class="score-desc">Confidence: 50&ndash;75%</div>
+                </div>
+                <div class="score-item neutral">
+                    <div class="score-label">Score = 0 &rarr; NEUTRAL</div>
+                    <div class="score-desc">Confidence: 40%</div>
+                </div>
+                <div class="score-item bearish">
+                    <div class="score-label">Score -3 to 0 &rarr; SLIGHTLY BEARISH</div>
+                    <div class="score-desc">Confidence: 50&ndash;75%</div>
+                </div>
+                <div class="score-item bearish">
+                    <div class="score-label">Score &le; -3 &rarr; BEARISH</div>
+                    <div class="score-desc">Confidence: 60&ndash;95%</div>
+                </div>
+            </div>
+
+            <p>There are also three custom rule filters: a minimum volume threshold that penalizes low-liquidity signals, a multiple-confirmation requirement (3+ indicators must agree), and a trend-following filter that suppresses signals in choppy, trendless markets. These were added after I noticed the raw score alone would fire too many low-quality signals.</p>
+
+            <h2>Price Prediction Algorithm</h2>
+
+            <p>Beyond a directional call, the app generates a 10-period forward price projection. The approach combines five factors, each contributing a small percentage adjustment to the current price, with confidence decaying as you project further out:</p>
+
+            <ul>
+                <li><strong>Momentum Factor:</strong> Recent 5-period price change (±2% influence)</li>
+                <li><strong>Trend Factor:</strong> Moving average alignment (±0.2% per period)</li>
+                <li><strong>RSI Influence:</strong> Overbought/oversold adjustment (±0.1%)</li>
+                <li><strong>MACD Signal:</strong> Momentum direction (±0.1% per period)</li>
+                <li><strong>Mean Reversion:</strong> 1% pull back toward the 20-SMA</li>
+            </ul>
+
+            <pre><code class="language-javascript">// Predicted price n periods ahead
+// adjustment = sum of all five factor contributions
+// decay = 1 - (n * 0.05)  — confidence drops 5% per period
+predictedPrice(n) = currentPrice * (1 + adjustment * decay)
+
+// Confidence bands widen with volatility over time
+upperBound = predicted + (volatility * n * 0.3)
+lowerBound = predicted - (volatility * n * 0.3)</code></pre>
+
+            <p>The mean reversion component was one of the more interesting design decisions. Most stocks don't trend in one direction indefinitely &mdash; they tend to oscillate around a moving average. Adding a 1% pull toward the 20-SMA keeps projections from running too far in one direction, which produced more realistic-looking forecast paths during testing.</p>
+
+            <h2>Candlestick Charts</h2>
+
+            <p>I used TradingView's Lightweight Charts library to render professional-grade candlestick charts. Each candle encodes four data points (Open, High, Low, Close) in a compact visual format that traders use to spot patterns quickly.</p>
+
+            <p>A green (bullish) candle means the closing price was higher than the open. A red (bearish) candle means the opposite. The wicks (thin lines above and below the body) show the high and low for that period. Patterns like doji (nearly equal open and close), hammer (long lower wick), and engulfing candles (one candle completely overlapping the previous) are commonly used as entry and exit signals.</p>
+
+            <p>The charts support pan, zoom, crosshair hover showing exact OHLC values, and a 20-SMA and 50-SMA overlay. They also auto-resize to the window, which was important for making the tool usable on a phone.</p>
+
+            <h2>Auto-Refresh System</h2>
+
+            <p>Day trading analysis becomes stale quickly, so I built an auto-refresh system with configurable intervals from 30 seconds up to 10 minutes. A live countdown timer shows seconds until the next fetch, and a manual "Refresh Now" button resets the countdown. The selected interval persists across page refreshes via session storage.</p>
+
+            <table class="indicator-table">
+                <thead>
+                    <tr>
+                        <th>Interval</th>
+                        <th>Best For</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr><td>30 seconds</td><td>Active scalping on 2-min charts</td></tr>
+                    <tr><td>1 minute</td><td>Day trading (recommended default)</td></tr>
+                    <tr><td>2 minutes</td><td>Moderate day trading</td></tr>
+                    <tr><td>5 minutes</td><td>Swing trading on 15&ndash;30 min charts</td></tr>
+                    <tr><td>10 minutes</td><td>Long-term / daily chart analysis</td></tr>
+                </tbody>
+            </table>
+
+            <h2>Technical Indicators: A Quick Reference</h2>
+
+            <p>Since this was also a learning project, here is a brief breakdown of each indicator used and why it matters:</p>
+
+            <h3>Simple Moving Average (SMA)</h3>
+            <p>The average closing price over N periods. A price above its 20-SMA suggests short-term upward momentum; crossing above the 50-SMA is considered a stronger trend signal. The app overlays both on the candlestick chart.</p>
+
+            <h3>RSI (Relative Strength Index)</h3>
+            <p>A 0&ndash;100 oscillator measuring the speed and magnitude of recent price changes. Readings above 70 suggest the asset is overbought (potential reversal down); below 30 suggests oversold (potential reversal up). The formula is: <code>RSI = 100 - (100 / (1 + RS))</code> where RS is the average gain divided by the average loss over 14 periods.</p>
+
+            <h3>MACD</h3>
+            <p>Built from two EMAs: the MACD line (12-EMA minus 26-EMA) and a 9-EMA signal line. When the MACD crosses above the signal line the momentum is turning bullish; below is bearish. The histogram (MACD minus Signal) makes the divergence easy to read at a glance.</p>
+
+            <h3>Bollinger Bands</h3>
+            <p>A volatility envelope: a 20-SMA in the middle, with upper and lower bands placed two standard deviations away. When price touches the lower band the asset may be oversold; near the upper band, overbought. A band squeeze (bands narrowing) often precedes a sharp breakout in either direction.</p>
+
+            <h2>What I Learned</h2>
+
+            <p>This project pushed me to think carefully about how to combine multiple noisy signals into a single, actionable output. A few takeaways:</p>
+
+            <ul>
+                <li><strong>Weighting matters:</strong> Equal-weight scoring produced too many conflicting signals. Assigning higher weight to trend indicators (SMA alignment) and lower weight to volume alone cleaned up the output significantly.</li>
+                <li><strong>Confidence decay is underrated:</strong> Projecting price 10 periods out without widening uncertainty bands looks misleading. The 5%-per-period decay forces the model to communicate honest uncertainty.</li>
+                <li><strong>CORS is painful:</strong> Accessing a third-party API from a static site with no backend means you're dependent on proxy reliability. Multiple fallback proxies were necessary for consistent data fetching.</li>
+                <li><strong>Client-side architecture has real limits:</strong> There is no way to store historical predictions or backtest performance without a backend. That is the most obvious next step.</li>
+            </ul>
+
+            <h2>What's Next</h2>
+
+            <p>The most interesting future direction is replacing the rules engine with an actual machine learning model &mdash; specifically an LSTM or Transformer trained on historical OHLC and indicator data. Other enhancements I want to explore include a backtesting module to evaluate the current rules against historical data, multi-stock comparison, and a news sentiment layer that factors in headline polarity alongside technical signals.</p>
+
+            <hr style="margin: 3rem 0;">
+
+            <p><strong>Questions or suggestions?</strong> Feel free to reach out via GitHub or connect with me on LinkedIn.</p>
+        </div>
+
+        <a href="../index.html#posts" class="back-link">&larr; Back to All Posts</a>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Patrick's AI Journey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-javascript.min.js"></script>
+</body>
+</html>

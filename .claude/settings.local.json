@@ -8,7 +8,13 @@
       "Bash(git -C \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Desktop\\\\AI-Blog\" add posts/ml-prediction-bias.html js/main.js)",
       "Bash(git -C \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Desktop\\\\AI-Blog\" commit -m \"$\\(cat <<''EOF''\nAdd new blog post: ML Prediction Bias in Fraud Detection\n\nNew post covering confusion matrices, performance metrics, and prediction\nbias in credit card fraud detection for banking and finance.\n\nCo-Authored-By: Claude Opus 4.5 <noreply@anthropic.com>\nEOF\n\\)\")",
       "Bash(git -C \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Desktop\\\\AI-Blog\" push)",
-      "Bash(git -C \"C:\\Users\\patri\\OneDrive\\Desktop\\AI-Blog\" status)"
+      "Bash(git -C \"C:\\Users\\patri\\OneDrive\\Desktop\\AI-Blog\" status)",
+      "Bash(dir \"C:\\\\Users\\\\patri\\\\OneDrive\\\\Documents\\\\Blog Post Papers\")",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(git push:*)",
+      "Bash(git stash *)",
+      "Bash(git pull *)"
     ]
   }
 }

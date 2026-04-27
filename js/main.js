@@ -1,6 +1,15 @@
 // Blog posts data
 const posts = [
     {
+        title: "Building an AI Day Trading Assistant for NASDAQ Analysis",
+        date: "April 27, 2026",
+        excerpt: "How I built a web-based AI trading tool using JavaScript, Yahoo Finance API, and technical indicators like RSI, MACD, and Bollinger Bands to generate real-time NASDAQ price predictions.",
+        tags: ["Finance", "JavaScript", "Technical Analysis", "Data Science"],
+        category: "data-science",
+        link: "posts/ai-trading-assistant.html",
+        image: "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=400&h=300&fit=crop"
+    },
+    {
         title: "Kaggle Housing Price Prediction with Linear Regression",
         date: "February 9, 2026",
         excerpt: "Using linear regression to predict house prices in the Kaggle House Prices competition, covering data cleaning, one-hot encoding, and model evaluation.",
