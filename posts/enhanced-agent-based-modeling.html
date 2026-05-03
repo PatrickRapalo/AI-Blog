@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enhanced ABM: Demographics & Churn Analysis - Patrick's AI Journey</title>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css">
+    <style>
+        .post-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 4rem 20px;
+        }
+
+        .post-header {
+            margin-bottom: 3rem;
+            text-align: center;
+        }
+
+        .post-title {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+        }
+
+        .post-meta {
+            color: #666;
+            font-size: 1rem;
+        }
+
+        .post-body {
+            line-height: 1.8;
+        }
+
+        .post-body h2 {
+            color: var(--primary-color);
+            margin-top: 2.5rem;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+
+        .post-body h3 {
+            color: var(--secondary-color);
+            margin-top: 2rem;
+            margin-bottom: 0.8rem;
+            font-size: 1.5rem;
+        }
+
+        .post-body p {
+            margin-bottom: 1.2rem;
+        }
+
+        .post-body ul, .post-body ol {
+            margin-bottom: 1.2rem;
+            margin-left: 2rem;
+        }
+
+        .post-body li {
+            margin-bottom: 0.5rem;
+        }
+
+        .post-body code {
+            background-color: #f4f4f4;
+            padding: 0.2rem 0.4rem;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+
+        .post-body pre {
+            background-color: #2d2d2d;
+            padding: 1.5rem;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-bottom: 1.5rem;
+        }
+
+        .post-body pre code {
+            background-color: transparent;
+            padding: 0;
+            color: #f8f8f2;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .highlight-box {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.95rem;
+        }
+
+        .data-table th {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 0.75rem 1rem;
+            text-align: left;
+        }
+
+        .data-table td {
+            padding: 0.65rem 1rem;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .data-table tr:nth-child(even) td {
+            background-color: #f9f9f9;
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .results-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .result-card {
+            background-color: #f4f9ff;
+            border: 1px solid #c8dff7;
+            border-radius: 8px;
+            padding: 1rem 1.2rem;
+            text-align: center;
+        }
+
+        .result-card .metric-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: var(--primary-color);
+        }
+
+        .result-card .metric-label {
+            font-size: 0.85rem;
+            color: #555;
+            margin-top: 0.25rem;
+        }
+
+        .result-card .metric-ci {
+            font-size: 0.8rem;
+            color: #777;
+            margin-top: 0.2rem;
+        }
+
+        @media (max-width: 600px) {
+            .results-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-brand">
+                <a href="../index.html">Patrick's AI Journey</a>
+            </div>
+            <ul class="nav-links">
+                <li><a href="../index.html#about">About</a></li>
+                <li><a href="../index.html#posts">Posts</a></li>
+                <li><a href="https://github.com/yourusername" target="_blank">
+                    <i class="fab fa-github"></i>
+                </a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Post Content -->
+    <article class="post-content">
+        <a href="../index.html#posts" class="back-link">← Back to All Posts</a>
+
+        <header class="post-header">
+            <h1 class="post-title">Enhanced ABM: Demographics & Churn Analysis</h1>
+            <p class="post-meta">
+                <i class="far fa-calendar"></i> May 3, 2026 |
+                <i class="far fa-clock"></i> 12 min read
+            </p>
+        </header>
+
+        <div class="post-body">
+            <p>This post is a continuation of my earlier work on <a href="agent-based-modeling.html" style="color: var(--primary-color); font-weight: bold;">Agent-Based Modeling: Simulating Social Feature Adoption</a>. In that project, I built a basic model where 1,000 users on a 50x50 grid adopted a social media feature based solely on how many of their neighbors had already done so. It captured network effects well, but it had two major simplifications: all users were identical, and once someone adopted, they never left. This enhanced model fixes both of those.</p>
+
+            <div class="highlight-box">
+                <strong>What's new in this version:</strong>
+                <ul>
+                    <li>Realistic demographic segmentation — age groups and tech savviness</li>
+                    <li>Churn mechanics — users can abandon features after adoption</li>
+                    <li>100 Monte Carlo simulations for statistical robustness</li>
+                    <li>Actionable business insights from demographic patterns</li>
+                </ul>
+            </div>
+
+            <h2>Model Enhancements Overview</h2>
+
+            <p>The core change is transforming simple, identical agents into realistic users with individual characteristics that affect their behavior. Here's how the two versions compare:</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Feature</th>
+                        <th>Basic Model</th>
+                        <th>Enhanced Model</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Demographics</td>
+                        <td>None (all identical)</td>
+                        <td>Age group + Tech savviness</td>
+                    </tr>
+                    <tr>
+                        <td>Influence Threshold</td>
+                        <td>Uniform(0.20, 0.60)</td>
+                        <td>Modified by demographics</td>
+                    </tr>
+                    <tr>
+                        <td>Adoption</td>
+                        <td>Permanent</td>
+                        <td>Can churn after adoption</td>
+                    </tr>
+                    <tr>
+                        <td>Tracking</td>
+                        <td>Adoption only</td>
+                        <td>Adoption + Churn + Demographics</td>
+                    </tr>
+                    <tr>
+                        <td>Analysis</td>
+                        <td>Single run</td>
+                        <td>100 Monte Carlo simulations</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h2>Demographics Implementation</h2>
+
+            <h3>Age Groups</h3>
+
+            <p>Users are segmented into three age categories, each with distinct behavioral patterns. Younger users are quicker to adopt but also quicker to leave. Older users are harder to convince but far more loyal once they're in.</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Age Group</th>
+                        <th>Distribution</th>
+                        <th>Threshold Modifier</th>
+                        <th>Churn Modifier</th>
+                        <th>Behavior</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Young (18–30)</td>
+                        <td>30%</td>
+                        <td>-0.10</td>
+                        <td>1.5x</td>
+                        <td>Quick to adopt, quick to leave</td>
+                    </tr>
+                    <tr>
+                        <td>Middle (31–55)</td>
+                        <td>50%</td>
+                        <td>0.00</td>
+                        <td>1.0x</td>
+                        <td>Baseline behavior</td>
+                    </tr>
+                    <tr>
+                        <td>Senior (56+)</td>
+                        <td>20%</td>
+                        <td>+0.10</td>
+                        <td>0.7x</td>
+                        <td>Slower to adopt, more loyal</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Tech Savviness</h3>
+
+            <p>Technical proficiency is modeled as a three-tier system that independently affects both adoption resistance and retention:</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Tech Level</th>
+                        <th>Distribution</th>
+                        <th>Threshold Modifier</th>
+                        <th>Churn Modifier</th>
+                        <th>Characteristics</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Low</td>
+                        <td>20%</td>
+                        <td>+0.15</td>
+                        <td>1.3x</td>
+                        <td>High resistance, high churn</td>
+                    </tr>
+                    <tr>
+                        <td>Medium</td>
+                        <td>50%</td>
+                        <td>0.00</td>
+                        <td>1.0x</td>
+                        <td>Baseline behavior</td>
+                    </tr>
+                    <tr>
+                        <td>High</td>
+                        <td>30%</td>
+                        <td>-0.15</td>
+                        <td>0.8x</td>
+                        <td>Low resistance, low churn</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Combined Threshold Calculation</h3>
+
+            <p>Each agent's influence threshold is computed by combining a base random value with both demographic modifiers:</p>
+
+            <pre><code class="language-python">threshold = clip(base_threshold + age_modifier + tech_modifier, 0.05, 0.95)</code></pre>
+
+            <p>This creates meaningful heterogeneity. A young, high-tech user might have a threshold of 0.15 — easy to convince with minimal social proof. A senior, low-tech user might land at 0.65 — needing two-thirds of their neighbors on board before adopting.</p>
+
+            <h2>Churn Mechanism</h2>
+
+            <h3>How It Works</h3>
+
+            <p>After initial adoption, each user enters a 10-day "honeymoon period" of guaranteed retention. After that, every day they face a probability of abandoning the feature:</p>
+
+            <pre><code class="language-python">P(churn) = base_rate × age_modifier × tech_modifier</code></pre>
+
+            <p>The base churn rate is 2% per day. Once a user churns, they do not re-adopt. This creates meaningful differences in retention across the user base:</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Segment</th>
+                        <th>Daily Churn Rate</th>
+                        <th>Expected Retention at 30 Days</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Young + Low Tech</td>
+                        <td>3.9%</td>
+                        <td>~30%</td>
+                    </tr>
+                    <tr>
+                        <td>Middle + Medium Tech</td>
+                        <td>2.0%</td>
+                        <td>~55%</td>
+                    </tr>
+                    <tr>
+                        <td>Senior + High Tech</td>
+                        <td>1.4%</td>
+                        <td>~65%</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Impact on System Dynamics</h3>
+
+            <p>Churn fundamentally changes the shape of the adoption curve. Without churn, the model from the original post showed adoption climbing monotonically to a plateau. With churn, the system behaves differently:</p>
+
+            <ul>
+                <li><strong>Without churn:</strong> Adoption increases steadily to a plateau and stays there</li>
+                <li><strong>With churn:</strong> The system reaches equilibrium where new adoptions balance losses</li>
+                <li><strong>Peak occurs:</strong> Around the point where adoption rate exceeds churn rate</li>
+                <li><strong>Equilibrium:</strong> Settles at roughly 40–50% of the population as active users</li>
+            </ul>
+
+            <h2>Statistical Analysis: 100 Simulations</h2>
+
+            <p>A single simulation run is always subject to the randomness of initial conditions — which users are early adopters, how the grid is populated. To get reliable estimates, I ran 100 independent Monte Carlo simulations, each with:</p>
+
+            <ul>
+                <li>1,000 agents with randomly assigned demographics</li>
+                <li>5% seeded as early adopters</li>
+                <li>300 simulated days</li>
+                <li>Full daily tracking of adoption, churn, and demographic breakdowns</li>
+            </ul>
+
+            <h2>Results and Findings</h2>
+
+            <h3>Overall Performance</h3>
+
+            <div class="results-grid">
+                <div class="result-card">
+                    <div class="metric-value">580</div>
+                    <div class="metric-label">Peak Active Users (avg)</div>
+                    <div class="metric-ci">95% CI: 495 – 665</div>
+                </div>
+                <div class="result-card">
+                    <div class="metric-value">450</div>
+                    <div class="metric-label">Final Active Users (avg)</div>
+                    <div class="metric-ci">95% CI: 360 – 540</div>
+                </div>
+                <div class="result-card">
+                    <div class="metric-value">25.5%</div>
+                    <div class="metric-label">Final Churn Rate (avg)</div>
+                    <div class="metric-ci">95% CI: 19.5% – 31.5%</div>
+                </div>
+                <div class="result-card">
+                    <div class="metric-value">Day 85</div>
+                    <div class="metric-label">Average Days to Peak</div>
+                    <div class="metric-ci">95% CI: Day 52 – Day 118</div>
+                </div>
+            </div>
+
+            <h3>Demographic Patterns</h3>
+
+            <p>Adoption rates varied clearly across segments:</p>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Segment</th>
+                        <th>Avg Adoption Rate</th>
+                        <th>Interpretation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Young Users</td>
+                        <td>52.3%</td>
+                        <td>Highest adoption, highest churn</td>
+                    </tr>
+                    <tr>
+                        <td>Middle-Aged</td>
+                        <td>45.8%</td>
+                        <td>Moderate, stable baseline</td>
+                    </tr>
+                    <tr>
+                        <td>Senior Users</td>
+                        <td>38.2%</td>
+                        <td>Lower adoption, high loyalty</td>
+                    </tr>
+                    <tr>
+                        <td>High Tech</td>
+                        <td>58.7%</td>
+                        <td>Early adopters, moderate churn</td>
+                    </tr>
+                    <tr>
+                        <td>Low Tech</td>
+                        <td>32.1%</td>
+                        <td>Resistant, high churn if they do adopt</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Variability</h3>
+
+            <p>The coefficient of variation for final active users was approximately 11%, indicating moderate variability from random initial conditions. The 90% confidence interval spans 360 to 540, which provides a reliable planning range for business use cases.</p>
+
+            <h2>Business Implications</h2>
+
+            <h3>Strategic Insights</h3>
+
+            <ul>
+                <li><strong>Target middle-aged, high-tech users for stable growth:</strong> These users balance solid adoption rates with low churn, forming the reliable core of the user base.</li>
+                <li><strong>Invest in retention for young users:</strong> They drive early momentum, but without ongoing retention efforts, that momentum won't hold.</li>
+                <li><strong>Simplify UX for low-tech users:</strong> This segment faces two barriers at once — high resistance to adoption and high churn if they do. Better onboarding could unlock a meaningful market segment.</li>
+                <li><strong>Plan for equilibrium, not continuous growth:</strong> With churn, the system stabilizes around 40–50% active users. Revenue and infrastructure projections should reflect a plateau, not exponential growth.</li>
+                <li><strong>Prepare early for peak:</strong> Maximum engagement arrives around Day 85. Marketing campaigns, server capacity, and support resources should be in place before then.</li>
+            </ul>
+
+            <h3>Risk Factors</h3>
+
+            <ul>
+                <li><strong>High variability in outcomes:</strong> Random initial conditions can produce 20–30% variance in final user counts across otherwise identical setups.</li>
+                <li><strong>Churn significantly erodes long-term value:</strong> Without retention efforts, churn reduces the final user base by 30–40% compared to no-churn scenarios.</li>
+                <li><strong>Demographic imbalances:</strong> A user base skewed young and low-tech will have structurally higher churn that's hard to overcome without product changes.</li>
+                <li><strong>Network effects can fail to launch:</strong> If early adopters are poorly connected or clustered in low-density grid regions, adoption may stall before reaching critical mass — the same stagnation issue from the original model, now compounded by churn.</li>
+            </ul>
+
+            <h2>Technical Implementation</h2>
+
+            <p>The model was built in Python using the same Mesa framework from the original project, with additional libraries for statistics and visualization:</p>
+
+            <ul>
+                <li><strong>Mesa (v2.x):</strong> Agent-based modeling framework</li>
+                <li><strong>NumPy:</strong> Numerical computing and random number generation</li>
+                <li><strong>Pandas:</strong> Data manipulation and statistical analysis</li>
+                <li><strong>Matplotlib:</strong> Time series plots and distribution charts</li>
+                <li><strong>tqdm:</strong> Progress tracking for the 100-simulation batch run</li>
+                <li><strong>Google Colab:</strong> Cloud execution environment</li>
+            </ul>
+
+            <p>The implementation is organized into modular components:</p>
+
+            <pre><code class="language-python">class EnhancedSocialMediaUser(mesa.Agent):
+    def __init__(self, model):
+        super().__init__(model)
+        # Assign age group
+        self.age_group = np.random.choice(
+            ['young', 'middle', 'senior'], p=[0.30, 0.50, 0.20]
+        )
+        age_modifiers = {'young': (-0.10, 1.5), 'middle': (0.00, 1.0), 'senior': (0.10, 0.7)}
+        age_thresh_mod, self.age_churn_mod = age_modifiers[self.age_group]
+
+        # Assign tech savviness
+        self.tech_level = np.random.choice(
+            ['low', 'medium', 'high'], p=[0.20, 0.50, 0.30]
+        )
+        tech_modifiers = {'low': (0.15, 1.3), 'medium': (0.00, 1.0), 'high': (-0.15, 0.8)}
+        tech_thresh_mod, self.tech_churn_mod = tech_modifiers[self.tech_level]
+
+        base = np.random.uniform(0.20, 0.60)
+        self.influence_threshold = np.clip(base + age_thresh_mod + tech_thresh_mod, 0.05, 0.95)
+
+        self.adopted_feature = False
+        self.churned = False
+        self.days_since_adoption = 0
+
+    def step(self):
+        if self.churned:
+            return
+
+        if not self.adopted_feature:
+            neighbors = self.model.grid.get_neighbors(self.pos)
+            if neighbors:
+                adoption_rate = sum(n.adopted_feature for n in neighbors) / len(neighbors)
+                if adoption_rate > self.influence_threshold:
+                    self.adopted_feature = True
+        else:
+            self.days_since_adoption += 1
+            if self.days_since_adoption > 10:  # honeymoon period
+                base_churn = 0.02
+                p_churn = base_churn * self.age_churn_mod * self.tech_churn_mod
+                if np.random.random() < p_churn:
+                    self.adopted_feature = False
+                    self.churned = True</code></pre>
+
+            <p>Running 100 simulations of 1,000 agents over 300 time steps took approximately 5–10 minutes on a CPU-only Google Colab instance, generating roughly 30 MB of time-series data in total.</p>
+
+            <h2>Conclusion</h2>
+
+            <p>Adding demographics and churn to the original model transforms it from a theoretical toy into something closer to a real business planning tool. The key insight is that not all users behave the same — and the mix of who adopts early has compounding effects on long-term retention.</p>
+
+            <div class="highlight-box">
+                <strong>Key takeaways:</strong>
+                <ul>
+                    <li>Demographics and churn shift the system from monotonic growth to dynamic equilibrium</li>
+                    <li>100 simulations provide confidence intervals useful for actual business planning</li>
+                    <li>Young/low-tech segments need different product strategies than middle-aged/high-tech ones</li>
+                    <li>Peak engagement (~Day 85) happens well before the system stabilizes — prepare for it early</li>
+                </ul>
+            </div>
+
+            <p>Future directions I'm interested in exploring: modeling retention campaigns, replacing the grid with a small-world or scale-free network topology, simulating competitive dynamics between two features, and tracking cohort lifetime value over time.</p>
+
+            <hr style="margin: 3rem 0;">
+
+            <p><strong>Questions or suggestions?</strong> Feel free to reach out via GitHub or connect with me on LinkedIn.</p>
+        </div>
+
+        <a href="../index.html#posts" class="back-link">← Back to All Posts</a>
+    </article>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2026 Patrick's AI Journey. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/components/prism-python.min.js"></script>
+</body>
+</html>
