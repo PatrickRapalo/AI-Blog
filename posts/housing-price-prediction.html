@@ -159,6 +159,14 @@
 
             <p>I wanted to work on a Kaggle dataset/competition. I have worked on and used logistic regression for the Titanic dataset, so I wanted to try my hand at another predictive problem: the House Prices competition. The main goal here was to use the 79 attributes provided to predict the sale price of a house. Since this is a regression problem (predicting a continuous value rather than a category), I used linear regression and wanted to see how accurate it could be.</p>
 
+            <p>
+                <i class="fab fa-google"></i>
+                <strong>Notebooks:</strong>
+                <a href="https://colab.research.google.com/drive/1iuxFSStgIqeNcDW33eJeZHyqU9_SnwyC?usp=sharing" target="_blank">Feature Engineering</a>
+                &nbsp;|&nbsp;
+                <a href="https://colab.research.google.com/drive/1deAOQnGGalbdrwWX1NqcV_tJ5fcpFpYO?usp=sharing" target="_blank">XGBoost Model</a>
+            </p>
+
             <h2>Data Cleaning</h2>
 
             <p>First, I cleaned the data by removing columns with a large number of null values, and then imputing the remaining columns with the mean (for numeric columns) and mode (for categorical columns). I then used a one-hot encoder to convert categorical variables into a binary format.</p>
@@ -236,6 +244,15 @@ Training MAE: 13511.797268099297</code></pre>
             <div class="metric-card">
                 <p class="metric-name">MAE (Mean Absolute Error) &mdash; $13,512</p>
                 <p>The MAE is the average of the absolute prediction errors. It gives a more typical sense of the average error. This means the model's predictions are typically about $13,500 above or below the actual price.</p>
+            </div>
+
+            <h2>Kaggle Submission</h2>
+
+            <p>After generating predictions on the test set, I submitted them to Kaggle. The competition evaluates submissions using RMSLE (Root Mean Squared Log Error), which penalizes underestimates more than overestimates and handles the wide price range well.</p>
+
+            <div class="metric-card">
+                <p class="metric-name">Kaggle Score (RMSLE) &mdash; 0.12895</p>
+                <p>A final leaderboard score of 0.12895 RMSLE, which places the model in a competitive range for a baseline linear regression approach with one-hot encoding and mean/mode imputation.</p>
             </div>
 
             <h2>Conclusion</h2>
