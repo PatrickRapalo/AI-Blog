@@ -2,7 +2,7 @@
 const posts = [
     {
         title: "I Built an Agentic AI Project Manager for a Hackathon",
-        date: "April 2026",
+        date: "April 27, 2026",
         excerpt: "My team built SentinelPM at an Agentic AI Hackathon — an autonomous system that pulls Jira data, identifies risks via Gemini, reassigns overdue tickets, and handles client emails automatically.",
         tags: ["Agentic AI", "n8n", "Google Gemini", "Jira", "Automation"],
         category: "agents",
@@ -11,7 +11,7 @@ const posts = [
     },
     {
         title: "Building an E-Sports Stats Dashboard",
-        date: "March 2026",
+        date: "April 14, 2026",
         excerpt: "A full-stack stats dashboard for Fortnite, Valorant, and CS:GO built with React, FastAPI, and Supabase — inspired by the data-dense layout of Tracker.gg.",
         tags: ["Web Dev", "React", "FastAPI", "Supabase", "Python"],
         category: "data-science",
@@ -20,7 +20,7 @@ const posts = [
     },
     {
         title: "Building an AI Day Trading Assistant for NASDAQ Analysis",
-        date: "April 27, 2026",
+        date: "April 4, 2026",
         excerpt: "How I built a web-based AI trading tool using JavaScript, Yahoo Finance API, and technical indicators like RSI, MACD, and Bollinger Bands to generate real-time NASDAQ price predictions.",
         tags: ["Finance", "JavaScript", "Technical Analysis", "Data Science"],
         category: "data-science",
@@ -29,7 +29,7 @@ const posts = [
     },
     {
         title: "Kaggle Housing Price Prediction with Linear Regression",
-        date: "February 9, 2026",
+        date: "February 17, 2026",
         excerpt: "Using linear regression to predict house prices in the Kaggle House Prices competition, covering data cleaning, one-hot encoding, and model evaluation.",
         tags: ["Machine Learning", "Regression", "Kaggle", "Python"],
         category: "machine-learning",
@@ -37,17 +37,8 @@ const posts = [
         image: "https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=400&h=300&fit=crop"
     },
     {
-        title: "MedMNIST Visual AI Model Comparison: When Simplicity Beats Complexity",
-        date: "February 3, 2025",
-        excerpt: "Exploring whether complex models always perform better by comparing six computer vision architectures on medical imaging data.",
-        tags: ["Computer Vision", "Medical Imaging", "Transfer Learning", "Deep Learning"],
-        category: "computer-vision",
-        link: "posts/medmnist-model-comparison.html",
-        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop"
-    },
-    {
         title: "ML Prediction Bias: Understanding Confusion Matrices in Fraud Detection",
-        date: "February 2, 2025",
+        date: "March 5, 2026",
         excerpt: "Exploring how ML classification models detect credit card fraud, understanding confusion matrices and performance metrics.",
         tags: ["Machine Learning", "Bias", "Classification", "Banking"],
         category: "machine-learning",
@@ -55,22 +46,31 @@ const posts = [
         image: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=400&h=300&fit=crop"
     },
     {
-        title: "Agent-Based Modeling: Simulating Social Feature Adoption",
-        date: "February 1, 2025",
-        excerpt: "Exploring Agent-Based Modeling through a social media feature adoption simulation. Learn how simple rules create complex emergent behavior.",
-        tags: ["Agent-Based Modeling", "Python", "Mesa", "Simulation"],
-        category: "agents",
-        link: "posts/agent-based-modeling.html",
-        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=300&fit=crop"
-    },
-    {
         title: "Agent-Based Modeling vs Agent-Oriented Programming",
-        date: "February 1, 2025",
+        date: "February 8, 2026",
         excerpt: "Understanding the key differences between ABM and AOP, and when to use each approach in AI and software development.",
         tags: ["AOP", "Multi-Agent Systems", "Software Architecture"],
         category: "agents",
         link: "posts/agent-oriented-programming.html",
         image: "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&h=300&fit=crop"
+    },
+    {
+        title: "MedMNIST Visual AI Model Comparison: When Simplicity Beats Complexity",
+        date: "February 3, 2026",
+        excerpt: "Exploring whether complex models always perform better by comparing six computer vision architectures on medical imaging data.",
+        tags: ["Computer Vision", "Medical Imaging", "Transfer Learning", "Deep Learning"],
+        category: "computer-vision",
+        link: "posts/medmnist-model-comparison.html",
+        image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=400&h=300&fit=crop"
+    },
+    {
+        title: "Agent-Based Modeling: Simulating Social Feature Adoption",
+        date: "February 3, 2026",
+        excerpt: "Exploring Agent-Based Modeling through a social media feature adoption simulation. Learn how simple rules create complex emergent behavior.",
+        tags: ["Agent-Based Modeling", "Python", "Mesa", "Simulation"],
+        category: "agents",
+        link: "posts/agent-based-modeling.html",
+        image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=400&h=300&fit=crop"
     }
 ];
 

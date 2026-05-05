@@ -201,9 +201,19 @@
 
             <p>The home dashboard gives you a cross-game overview — KD ratio, win rate, average kills — and highlights your best performance across all three games with a highlight card at the top. From there you can drill into each game's individual page.</p>
 
+            <figure style="margin: 2rem 0; text-align: center;">
+                <img src="../assets/photos/homepage.png" alt="E-Sports dashboard home page" style="max-width: 100%; border-radius: 8px; border: 1px solid #e0e0e0;">
+                <figcaption style="margin-top: 0.75rem; color: #666; font-size: 0.9rem;">The home dashboard aggregating cross-game stats with a highlight card for best performance.</figcaption>
+            </figure>
+
             <p>Each game page shows stats specific to that title. Valorant tracks agent, headshot percentage, and round win rate. Fortnite tracks placement, game mode, and elimination count. CS:GO tracks map, flash assists, and bomb plants. I wanted the per-game pages to feel native to each game rather than just slapping the same template on all three.</p>
 
             <p>Every page also has a match history table with filtering, so you can look back at individual sessions. And there are two chart types: a line chart for performance over time and a bar chart breaking down kills per game. Dark theme throughout, intentionally data-dense.</p>
+
+            <figure style="margin: 2rem 0; text-align: center;">
+                <img src="../assets/photos/stat_tracker.png" alt="Individual game stat tracker page" style="max-width: 100%; border-radius: 8px; border: 1px solid #e0e0e0;">
+                <figcaption style="margin-top: 0.75rem; color: #666; font-size: 0.9rem;">A per-game stat page showing match history, performance charts, and game-specific metrics.</figcaption>
+            </figure>
 
             <h2>Database Design</h2>
 
@@ -238,6 +248,11 @@
 
             <p>Keeping the tables separate made the schema cleaner and made it easier to write game-specific queries without a bunch of null columns everywhere. The tradeoff is that the cross-game aggregation queries on the home dashboard are a bit more involved — you have to union the results — but it was worth it.</p>
 
+            <figure style="margin: 2rem 0; text-align: center;">
+                <img src="../assets/photos/dbLayout.png" alt="Supabase database layout" style="max-width: 100%; border-radius: 8px; border: 1px solid #e0e0e0;">
+                <figcaption style="margin-top: 0.75rem; color: #666; font-size: 0.9rem;">The Supabase database layout with separate tables per game alongside shared player data.</figcaption>
+            </figure>
+
             <h2>The Backend</h2>
 
             <p>I used FastAPI for the backend, connected to Supabase via <code>supabase-py</code> with credentials in a <code>.env</code> file. The API exposes three main types of endpoints:</p>
@@ -263,6 +278,11 @@ async def get_dashboard_summary(player_id: str):
         .eq("player_id", player_id).execute()
 
     return aggregate_summary(fortnite.data, valorant.data, csgo.data)</code></pre>
+
+            <figure style="margin: 2rem 0; text-align: center;">
+                <img src="../assets/photos/Tournement_API.png" alt="Tournament API endpoint" style="max-width: 100%; border-radius: 8px; border: 1px solid #e0e0e0;">
+                <figcaption style="margin-top: 0.75rem; color: #666; font-size: 0.9rem;">The Tournament API endpoint returning structured match data for the dashboard.</figcaption>
+            </figure>
 
             <h2>What I Took Away</h2>
 

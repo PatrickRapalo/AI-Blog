@@ -175,6 +175,11 @@
 
             <p>We structured SentinelPM as two separate agentic pipelines, each with its own trigger and purpose. They share the same Jira and Gemini integrations but operate independently.</p>
 
+            <figure style="margin: 2rem 0; text-align: center;">
+                <img src="../assets/photos/n8nworkflow.png" alt="n8n workflow diagram for SentinelPM" style="max-width: 100%; border-radius: 8px; border: 1px solid #e0e0e0;">
+                <figcaption style="margin-top: 0.75rem; color: #666; font-size: 0.9rem;">The full n8n workflow for SentinelPM, showing both the scheduled risk agent and the event-driven client communication agent.</figcaption>
+            </figure>
+
             <div class="pipeline-card">
                 <h3>Pipeline 1 &mdash; Risk &amp; Prioritization Agent</h3>
                 <p>This one runs on a schedule. Every morning it wakes up, pulls live ticket data from Jira via the Atlassian REST API, and feeds that data into Google Gemini to identify risks — things like tickets that are overdue, blocked, or assigned to someone who already has a full plate.</p>
